@@ -1,0 +1,11 @@
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Model\ceiling.xnb
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Model\floor.xnb
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Model\wall.xnb
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\pavers1d2.xnb
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\walltexture.xnb
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Assignment3.exe
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Assignment3.pdb
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Assignment3.csprojResolveAssemblyReference.cache
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Assignment3.exe
+c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Assignment3.pdb

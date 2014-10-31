@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Model\ceiling.fbx</Source>
+      <Name>Model\ceiling</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Model\ceiling.xnb</Output>
+      <Time>2014-10-30T16:08:03.2770773-07:00</Time>
+      <Dependency>
+        <Key>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Model\ceiling_0.xml</Key>
+        <Value>2014-10-30T16:22:32.3934712-07:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Model\floor.fbx</Source>
+      <Name>Model\floor</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Model\floor.xnb</Output>
+      <Time>2014-10-30T15:34:59.9306199-07:00</Time>
+      <Dependency>
+        <Key>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Model\floor_0.xml</Key>
+        <Value>2014-10-30T16:22:32.546573-07:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Model\wall.fbx</Source>
+      <Name>Model\wall</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Model\wall.xnb</Output>
+      <Time>2014-10-30T16:10:20.9399672-07:00</Time>
+      <Dependency>
+        <Key>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Model\wall_0.xml</Key>
+        <Value>2014-10-30T16:22:32.5956048-07:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Texture\pavers1d2.jpg</Source>
+      <Name>Texture\pavers1d2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\pavers1d2.xnb</Output>
+      <Time>2014-10-30T16:24:30.9048275-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\walltexture.dds</Source>
+      <Name>Texture\walltexture</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\walltexture.xnb</Output>
+      <Time>2014-10-30T16:10:21.0180847-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\ceiling.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Model\ceiling_0.xml</Output>
+      <Time>2014-10-30T16:08:03.2770773-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\floor.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Model\floor_0.xml</Output>
+      <Time>2014-10-30T15:34:59.9306199-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\wall.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\Model\wall_0.xml</Output>
+      <Time>2014-10-30T16:10:20.9399672-07:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{3998F4F2-B994-4FF2-B28E-0CF81916DFE6}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3Content\</RootDirectory>
+      <LoggerRootDirectory>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\</LoggerRootDirectory>
+      <IntermediateDirectory>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T16:22:30-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T16:22:30-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T16:22:30-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T16:22:30-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T16:22:30-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T16:22:30-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2014-09-03T21:24:46.6415654-07:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
