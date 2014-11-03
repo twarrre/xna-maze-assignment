@@ -111,22 +111,22 @@ namespace Assignment3
             previousKeyboardState = currentKeyboardState;
             currentKeyboardState = Keyboard.GetState();
 
-            if (currentKeyboardState.IsKeyDown(Keys.W))
+            if (currentKeyboardState.IsKeyDown(Keys.Up))
             {
                 i.SetForward(1.0f);
             }
 
-            if (currentKeyboardState.IsKeyDown(Keys.S))
+            if (currentKeyboardState.IsKeyDown(Keys.Down))
             {
                 i.SetBackward(-1.0f);
             }
 
-            if (currentKeyboardState.IsKeyDown(Keys.A))
+            if (currentKeyboardState.IsKeyDown(Keys.Left))
             {
                 i.SetLeft(-1.0f);
             }
 
-            if (currentKeyboardState.IsKeyDown(Keys.D))
+            if (currentKeyboardState.IsKeyDown(Keys.Right))
             {
                 i.SetRight(1.0f);
             }

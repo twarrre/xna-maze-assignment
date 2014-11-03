@@ -45,10 +45,17 @@ namespace Assignment3
         int[,] mazeLayout;
         BoundingSphere camBox;
         Boolean collided;
-
+        
         FirstPersonCamera camera;
         Vector3 startingPosition;
         Vector3 prevCamPosition;
+
+        Boolean collisionOn;
+
+        private KeyboardState currentKeyboardState;
+        private KeyboardState previousKeyboardState;
+        private GamePadState previousGamePadState;
+        private GamePadState currentGamePadState;
 
         public Game1()
         {
@@ -73,6 +80,7 @@ namespace Assignment3
             m.CreateMaze();
             mazeLayout = m.ToIntMap();
             collided = false;
+            collisionOn = true;
 
             // TODO: Add your initialization logic here
 
@@ -92,6 +100,10 @@ namespace Assignment3
             camera.Position = startingPosition;
             camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
             camBox = new BoundingSphere(camera.Position, 4);
+
+            currentKeyboardState = Keyboard.GetState();
+            currentGamePadState = GamePad.GetState(PlayerIndex.One);
+
             base.Initialize();
         }
 
@@ -140,25 +152,40 @@ namespace Assignment3
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            previousGamePadState = currentGamePadState;
+            currentGamePadState = GamePad.GetState(PlayerIndex.One);
+            previousKeyboardState = currentKeyboardState;
+            currentKeyboardState = Keyboard.GetState();
+
             collided = false;
 
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (currentGamePadState.Buttons.Back == ButtonState.Pressed
+                || currentKeyboardState.IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Home))
+            if (currentGamePadState.Buttons.Start == ButtonState.Pressed
+                || currentKeyboardState.IsKeyDown(Keys.Home))
             {
                 camera.Position = startingPosition;
                 camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
             }
 
-            for(int i = 0; i < MAZE_X; i++)
+            if (((previousGamePadState.Buttons.Y == ButtonState.Released) && (currentGamePadState.Buttons.Y == ButtonState.Pressed))
+                || ((currentKeyboardState.IsKeyDown(Keys.W) && previousKeyboardState.IsKeyUp(Keys.W))))
             {
-                for (int j = 0; j < MAZE_Y; j++)
+                collisionOn = !collisionOn;
+            }
+
+
+            if (collisionOn)
+            {
+                for (int i = 0; i < MAZE_X; i++)
                 {
-                    CollisionCheck(UpdateBox(camBox), mazeBoxes[i, j]);
+                    for (int j = 0; j < MAZE_Y; j++)
+                    {
+                        CollisionCheck(UpdateBox(camBox), mazeBoxes[i, j]);
+                    }
                 }
             }
 
