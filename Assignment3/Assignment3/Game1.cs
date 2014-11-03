@@ -43,6 +43,8 @@ namespace Assignment3
         Matrix view;
         BoundingBox[,] mazeBoxes;
         int[,] mazeLayout;
+        BoundingBox camBox;
+        Boolean collided;
 
         FirstPersonCamera camera;
 
@@ -68,6 +70,7 @@ namespace Assignment3
             MazeGenerator m = new MazeGenerator(MAZE_X, MAZE_Y);
             m.CreateMaze();
             mazeLayout = m.ToIntMap();
+            collided = false;
 
             // TODO: Add your initialization logic here
 
@@ -107,6 +110,8 @@ namespace Assignment3
 
             effect.Projection = camera.ProjectionMatrix;
             effect.View = camera.ViewMatrix;
+            
+            BuildMaze(wall, wallDiffuse, mazeLayout);
         }
 
         /// <summary>
@@ -129,6 +134,13 @@ namespace Assignment3
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+            for(int i = 0; i < MAZE_X; i++)
+            {
+                for (int j = 0; j < MAZE_Y; j++)
+                {
+                    CollisionCheck(UpdateBox(camBox), mazeBoxes[i, j]);
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -229,6 +241,28 @@ namespace Assignment3
             }
             box = BoundingBox.CreateFromPoints(points);
             return box;
+        }
+
+        private BoundingBox UpdateBox(BoundingBox box)
+        {
+            Vector3[] boxCorners = box.GetCorners();
+            for (int i = 0; i < boxCorners.Length; i++)
+            {
+                boxCorners[i].X *= camera.Position.X;
+                boxCorners[i].Y *= camera.Position.Y;
+                boxCorners[i].Z *= camera.Position.Z;
+            }
+
+            BoundingBox newbox = BoundingBox.CreateFromPoints(boxCorners);
+            return newbox;
+        }
+
+        private void CollisionCheck(BoundingBox cam, BoundingBox wall)
+        {
+            if (cam.Intersects(wall))
+            {
+                collided = true;
+            }            
         }
     }
 }
