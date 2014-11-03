@@ -33,13 +33,21 @@ namespace Assignment3
         Model[] walls;
         const int MAZE_X = 10;
         const int MAZE_Y = 10;
+        int maze_min_x;
+        int maze_max_z;
+        const int WALL_MIN_X = -40;
+        const int WALL_MAX_Z = 40;
+        const int WALL_WIDTH = 80;
+        float camRotX;
+        float camRotY;
+        float camRotZ;
         int camX;
         int camY;
         int camZ;
-        int wallWidth;
 
         Matrix projection;
         Matrix view;
+        BoundingBox[,] mazeBoxes;
         int[,] mazeLayout;
 
         public Game1()
@@ -56,23 +64,27 @@ namespace Assignment3
         /// </summary>
         protected override void Initialize()
         {
+            maze_max_z = WALL_MAX_Z * MAZE_Y;
+            maze_min_x = WALL_MIN_X * MAZE_X;
             MazeGenerator m = new MazeGenerator(MAZE_X, MAZE_Y);
             m.CreateMaze();
             mazeLayout = m.ToIntMap();
 
             // TODO: Add your initialization logic here
-            //mazeLayout = new int[MAZE_X, MAZE_Y]
-            //   {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-            //    {1, 1, 0, 1, 1, 0, 1, 0, 1, 1},
-            //    {1, 0, 1, 0, 1, 0, 0, 0, 0, 1},
-            //    {1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
-            //    {1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
-            //    {1, 0, 1, 0, 1, 0, 1, 1, 0, 1},
-            //    {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-            //    {1, 0, 1, 0, 0, 1, 1, 0, 1, 1},
-            //    {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-            //    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
-            wallWidth = 8;
+
+            //            mazeLayout = new int[MAZE_X, MAZE_Y]
+            //               {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
+            //                {1, 1, 0, 1, 1, 0, 1, 0, 1, 1},
+            //                {1, 0, 1, 0, 1, 0, 0, 0, 0, 1},
+            //                {1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+            //                {1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+            //                {1, 0, 1, 0, 1, 0, 1, 1, 0, 1},
+            //                {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+            //                {1, 0, 1, 0, 0, 1, 1, 0, 1, 1},
+            //                {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+            //                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+            mazeBoxes = new BoundingBox[MAZE_X, MAZE_Y];
+
             base.Initialize();
         }
 
@@ -98,7 +110,7 @@ namespace Assignment3
                 (float)this.Window.ClientBounds.Width / (float)this.Window.ClientBounds.Height,
                 1.0f, 10.0f);
             effect.Projection = projection;
-            view = Matrix.CreateTranslation(0.0f, 0.0f, -10.0f);
+            view = Matrix.CreateTranslation(camX, camY, camZ);
             effect.View = view;
         }
 
@@ -124,12 +136,12 @@ namespace Assignment3
                 this.Exit();
 
             // TODO: Add your update logic here
-            if(Keyboard.GetState().IsKeyDown(Keys.W))
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 camZ++;
             }
 
-            if(Keyboard.GetState().IsKeyDown(Keys.S))
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 camZ--;
             }
@@ -154,6 +166,26 @@ namespace Assignment3
                 camY++;
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                camRotY += 0.5f;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                camRotY -= 0.5f;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                camRotX += 0.5f;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                camRotX -= 0.5f; ;
+            }
+
             base.Update(gameTime);
         }
 
@@ -166,31 +198,22 @@ namespace Assignment3
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, mazeLayout);
-            //foreach (EffectPass pass in effect.CurrentTechnique.Passes)
-            //{
-            //    Matrix[] groundMatrix = new Matrix[wall.Bones.Count];
-            //    foreach (ModelMesh m in wall.Meshes)
-            //    {
-            //        foreach (ModelMeshPart part in m.MeshParts)
-            //        {
-            //            part.Effect = effect;
-            //        }
-            //        foreach (BasicEffect be in m.Effects)
-            //        {
-            //            be.TextureEnabled = true;
-            //            be.Texture = wallDiffuse;
-
-            //            be.EnableDefaultLighting();
-            //            be.World = groundMatrix[m.ParentBone.Index] * Matrix.Identity;
-            //            be.View = effect.View;
-            //            be.Projection = effect.Projection;
-            //            m.Draw();
-            //        }
-            //        //m.Draw();
-            //    }
-            //}
 
             base.Draw(gameTime);
+        }
+
+        private void BuildMaze(Model w, Texture2D wt, int[,] maze)
+        {
+            for (int x = 0; x < MAZE_X; x++)
+            {
+                for (int y = 0; y < MAZE_Y; y++)
+                {
+                    if (maze[x, y] == 1)
+                    {
+                        mazeBoxes[x, y] = CalBoundingBox(w, new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * x), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * y)));
+                    }
+                }
+            }
         }
 
         private void DrawMaze(Model w, Texture2D wt, Model f, Texture2D ft, Model c, Texture2D ct, int[,] maze)
@@ -203,14 +226,10 @@ namespace Assignment3
                 {
                     if (maze[x, y] == 1)
                     {
-                        DrawModel(w, wt, new Vector3(-360 - (-80 * x), 0, 360 - (80 * y)));
+                        DrawModel(w, wt, new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * x), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * y)));
                     }
                 }
             }
-        }
-        private void CreateWall(Model m, int coordinate)
-        {
-
         }
 
         private void DrawModel(Model m, Texture2D t, Vector3 pos)
@@ -221,9 +240,14 @@ namespace Assignment3
             Matrix projection =
                 Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
                 aspectRatio, 1.0f, 10000.0f);
-            Matrix view = Matrix.CreateLookAt(new Vector3(Mouse.GetState().X, Mouse.GetState().Y, 0.0f),
-                Vector3.Zero, Vector3.Up) * 
-                Matrix.CreateTranslation(camX, camY, camZ); 
+            Matrix view =
+                //Matrix.CreateRotationX(camRotX) 
+                //* Matrix.CreateRotationY(camRotY) 
+                //* Matrix.CreateRotationZ(camRotZ) 
+                //* Matrix.CreateTranslation(camX, camY, camZ); 
+                Matrix.CreateLookAt(new Vector3(camRotX, camRotY, camRotZ),
+                Vector3.Zero, Vector3.Up) *
+                Matrix.CreateTranslation(camX, camY, camZ);
 
             foreach (ModelMesh mesh in m.Meshes)
             {
@@ -240,6 +264,39 @@ namespace Assignment3
                 }
                 mesh.Draw();
             }
+        }
+
+        private BoundingBox CalBoundingBox(Model mod, Vector3 worldPos)
+        {
+            List<Vector3> points = new List<Vector3>();
+            BoundingBox box;
+
+            Matrix[] boneTransforms = new Matrix[mod.Bones.Count];
+            mod.CopyAbsoluteBoneTransformsTo(boneTransforms);
+
+            foreach (ModelMesh mesh in mod.Meshes)
+            {
+                foreach (ModelMeshPart mmp in mesh.MeshParts)
+                {
+                    VertexPositionNormalTexture[] vertices =
+                        new VertexPositionNormalTexture[mmp.VertexBuffer.VertexCount];
+
+                    mmp.VertexBuffer.GetData<VertexPositionNormalTexture>(vertices);
+
+                    foreach (VertexPositionNormalTexture vertex in vertices)
+                    {
+                        Vector3 point = Vector3.Transform(vertex.Position,
+                            boneTransforms[mesh.ParentBone.Index]);
+
+                        Matrix mat = Matrix.CreateTranslation(worldPos);
+                        point = Vector3.Transform(point, mat);
+
+                        points.Add(point);
+                    }
+                }
+            }
+            box = BoundingBox.CreateFromPoints(points);
+            return box;
         }
     }
 }
