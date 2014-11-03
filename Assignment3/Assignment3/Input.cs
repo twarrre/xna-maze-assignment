@@ -16,6 +16,7 @@ namespace Assignment3
         private bool crouch;
         private bool sprint;
         private bool slide;
+        private bool zoom;
 
         private float mouseX;
         private float mouseY;
@@ -31,6 +32,7 @@ namespace Assignment3
             crouch = false;
             sprint = false;
             slide = false;
+            zoom = false;
 
             mouseX = 0;
             mouseY = 0;
@@ -45,6 +47,7 @@ namespace Assignment3
         public bool IsCrouching() { return crouch; }
         public bool IsSprinting() { return sprint; }
         public bool IsSliding() { return slide; }
+        public bool IsZooming() { return zoom; }
 
         public float GetViewX() { return mouseX; }
         public float GetViewY() { return mouseY; }
@@ -58,6 +61,7 @@ namespace Assignment3
         public void SetCrouching(bool c) { crouch = c; }
         public void SetSprinting(bool s) { sprint = s; }
         public void SetSliding(bool s) { slide = s; }
+        public void SetZoom(bool z) { zoom = z; }
 
         public void SetViewX(float x) { mouseX = x; }
         public void SetViewY(float Y) { mouseY = Y; }

@@ -57,6 +57,7 @@ namespace Assignment3
         private float eyeHeightStanding;
         private float eyeHeightCrouching; 
         private float eyeHeightSliding;
+        private float zoomFactor;
         private Vector3 eye;
         private Vector3 target;
         private Vector3 targetYAxis;
@@ -90,6 +91,7 @@ namespace Assignment3
             zfar = DEFAULT_ZFAR;
             accumHeadingDegrees = 0.0f;
             accumPitchDegrees = 0.0f;
+            zoomFactor = 1.0f;
             eyeHeightStanding = CAMERA_PLAYER_EYE_HEIGHT;
             eyeHeightCrouching = CAMERA_PLAYER_EYE_HEIGHT * HEIGHT_MULTIPLIER_CROUCHING;
             eyeHeightSliding = CAMERA_PLAYER_EYE_HEIGHT * HEIGHT_MULTIPLIER_SLIDING;
@@ -396,6 +398,21 @@ namespace Assignment3
             else
                 velocity = velocityWalking;
 
+            if (i.IsZooming())
+            {
+                if (zoomFactor < 4.0f)
+                {
+                    zoomFactor += 0.1f;
+                }
+            }
+            else
+            {
+                if (zoomFactor > 1.0f)
+                {
+                    zoomFactor -= 0.1f;
+                }
+            }
+
             direction = GetMovementDirection(direction, i);
 
             Rotate(i.GetViewX(), i.GetViewY());
@@ -616,6 +633,8 @@ namespace Assignment3
             viewDir.X = -zAxis.X;
             viewDir.Y = -zAxis.Y;
             viewDir.Z = -zAxis.Z;
+
+            viewMatrix *= Matrix.CreateScale(zoomFactor, zoomFactor, 1);
         }
 
 

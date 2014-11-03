@@ -152,6 +152,11 @@ namespace Assignment3
                 i.SetSprinting(false);
                 i.SetCrouching(false);
             }
+
+            if (currentKeyboardState.IsKeyDown(Keys.Z))
+            {
+                i.SetZoom(true);
+            }
         }
 
         private void ProcessMouse(ref Input i, Rectangle client)

@@ -3,7 +3,7 @@
   <Asset Type="Graphics:MeshContent">
     <Name>grid</Name>
     <Identity>
-      <SourceFilename>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3Content\Model\home.fbx</SourceFilename>
+      <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\Assignment3\Assignment3Content\Model\home.fbx</SourceFilename>
       <SourceTool>FbxImporter</SourceTool>
     </Identity>
     <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
@@ -32,7 +32,7 @@
     <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
       <Name>Scene_Material</Name>
       <Identity>
-        <SourceFilename>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3Content\Model\home.fbx</SourceFilename>
+        <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\Assignment3\Assignment3Content\Model\home.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
