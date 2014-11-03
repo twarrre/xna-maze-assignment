@@ -28,9 +28,19 @@ namespace Assignment3
         Texture2D wallDiffuse;
         Texture2D ceilingDiffuse;
         Texture2D floorDiffuse;
+        Matrix gameWorldRotation = Matrix.Identity;
+        Vector3 Position;
+        Model[] walls;
+        const int MAZE_X = 10;
+        const int MAZE_Y = 10;
+        int camX;
+        int camY;
+        int camZ;
+        int wallWidth;
 
-        Matrix view;
         Matrix projection;
+        Matrix view;
+        int[,] mazeLayout;
 
         public Game1()
         {
@@ -47,7 +57,18 @@ namespace Assignment3
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            mazeLayout = new int[MAZE_X, MAZE_Y]
+               {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
+                {1, 1, 0, 1, 1, 0, 1, 0, 1, 1},
+                {1, 0, 1, 0, 1, 0, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+                {1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+                {1, 0, 1, 0, 1, 0, 1, 1, 0, 1},
+                {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+                {1, 0, 1, 0, 0, 1, 1, 0, 1, 1},
+                {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+            wallWidth = 8;
             base.Initialize();
         }
 
@@ -94,10 +115,40 @@ namespace Assignment3
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+                || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
             // TODO: Add your update logic here
+            if(Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                camZ++;
+            }
+
+            if(Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                camZ--;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                camX++;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                camX--;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                camY--;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
+            {
+                camY++;
+            }
 
             base.Update(gameTime);
         }
@@ -110,22 +161,81 @@ namespace Assignment3
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            
-            foreach(ModelMesh m in wall.Meshes)
-            {
-                foreach (BasicEffect be in m.Effects)
-                {
-                    be.TextureEnabled = true;
-                    be.Texture = wallDiffuse;
+            DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, mazeLayout);
+            //foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+            //{
+            //    Matrix[] groundMatrix = new Matrix[wall.Bones.Count];
+            //    foreach (ModelMesh m in wall.Meshes)
+            //    {
+            //        foreach (ModelMeshPart part in m.MeshParts)
+            //        {
+            //            part.Effect = effect;
+            //        }
+            //        foreach (BasicEffect be in m.Effects)
+            //        {
+            //            be.TextureEnabled = true;
+            //            be.Texture = wallDiffuse;
 
-                    be.EnableDefaultLighting();
-                    be.World = Matrix.Identity * Matrix.CreateTranslation(0, 0, 50);
-                    be.View = view;
-                    be.Projection = projection;
-                }
-            }
+            //            be.EnableDefaultLighting();
+            //            be.World = groundMatrix[m.ParentBone.Index] * Matrix.Identity;
+            //            be.View = effect.View;
+            //            be.Projection = effect.Projection;
+            //            m.Draw();
+            //        }
+            //        //m.Draw();
+            //    }
+            //}
 
             base.Draw(gameTime);
+        }
+
+        private void DrawMaze(Model w, Texture2D wt, Model f, Texture2D ft, Model c, Texture2D ct, int[,] maze)
+        {
+            DrawModel(f, ft, new Vector3(0, 0, 0));
+            DrawModel(c, ct, new Vector3(0, 0, 0));
+            for (int x = 0; x < MAZE_X; x++)
+            {
+                for (int y = 0; y < MAZE_Y; y++)
+                {
+                    if (maze[x, y] == 1)
+                    {
+                        DrawModel(w, wt, new Vector3(-360 - (-80 * x), 0, 360 - (80 * y)));
+                    }
+                }
+            }
+        }
+        private void CreateWall(Model m, int coordinate)
+        {
+
+        }
+
+        private void DrawModel(Model m, Texture2D t, Vector3 pos)
+        {
+            Matrix[] transforms = new Matrix[m.Bones.Count];
+            float aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
+            m.CopyAbsoluteBoneTransformsTo(transforms);
+            Matrix projection =
+                Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
+                aspectRatio, 1.0f, 10000.0f);
+            Matrix view = Matrix.CreateLookAt(new Vector3(Mouse.GetState().X, Mouse.GetState().Y, 0.0f),
+                Vector3.Zero, Vector3.Up) * 
+                Matrix.CreateTranslation(camX, camY, camZ); 
+
+            foreach (ModelMesh mesh in m.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.TextureEnabled = true;
+                    effect.Texture = t;
+
+                    effect.View = view;
+                    effect.Projection = projection;
+                    effect.World = gameWorldRotation *
+                        transforms[mesh.ParentBone.Index] *
+                        Matrix.CreateTranslation(pos);
+                }
+                mesh.Draw();
+            }
         }
     }
 }

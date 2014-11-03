@@ -3,17 +3,17 @@
   <Asset Type="Graphics:MeshContent">
     <Name>grid</Name>
     <Identity>
-      <SourceFilename>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3Content\Model\ceiling.fbx</SourceFilename>
+      <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\Assignment3\Assignment3Content\Model\ceiling.fbx</SourceFilename>
       <SourceTool>FbxImporter</SourceTool>
     </Identity>
-    <Transform>1 0 0 0 0 -1 1.22464685E-16 0 0 -1.22464685E-16 -1 0 0 8 0 1</Transform>
+    <Transform>10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1</Transform>
     <Children>
       <Child>
         <Name>Texture_Support</Name>
-        <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
+        <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 8 0 1</Transform>
       </Child>
     </Children>
-    <Positions>-40 0 -40 -40 0 40 40 0 -40 40 0 40</Positions>
+    <Positions>40 8 -40 40 8 40 -40 8 -40 -40 8 40</Positions>
     <Geometry>
       <Batch>
         <Material>#Resource1</Material>
@@ -21,8 +21,8 @@
         <Vertices>
           <PositionIndices>0 1 3 2</PositionIndices>
           <Channels>
-            <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 1 0 0 1 0 0 1 0 0 1 0</VertexChannel>
-            <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0 0 0 1 1 1 1 0</VertexChannel>
+            <VertexChannel Name="Normal0" ElementType="Framework:Vector3">3.10862442E-16 -1 0 3.10862442E-16 -1 0 3.10862442E-16 -1 0 3.10862442E-16 -1 0</VertexChannel>
+            <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">1 0 1 1 0 1 0 0</VertexChannel>
           </Channels>
         </Vertices>
       </Batch>
@@ -30,9 +30,9 @@
   </Asset>
   <Resources>
     <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
-      <Name>Scene_Material</Name>
+      <Name>Scene_Root</Name>
       <Identity>
-        <SourceFilename>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3Content\Model\ceiling.fbx</SourceFilename>
+        <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\Assignment3\Assignment3Content\Model\ceiling.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>

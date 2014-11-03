@@ -3,10 +3,10 @@
   <Asset Type="Graphics:MeshContent">
     <Name>grid</Name>
     <Identity>
-      <SourceFilename>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3Content\Model\floor.fbx</SourceFilename>
+      <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\Assignment3\Assignment3Content\Model\floor.fbx</SourceFilename>
       <SourceTool>FbxImporter</SourceTool>
     </Identity>
-    <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
+    <Transform>10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1</Transform>
     <Children>
       <Child>
         <Name>Texture_Support</Name>
@@ -30,9 +30,9 @@
   </Asset>
   <Resources>
     <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
-      <Name>Scene_Material</Name>
+      <Name>Scene_Root</Name>
       <Identity>
-        <SourceFilename>c:\users\trevor\documents\visual studio 2010\Projects\Assignment3\Assignment3\Assignment3Content\Model\floor.fbx</SourceFilename>
+        <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\Assignment3\Assignment3Content\Model\floor.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
