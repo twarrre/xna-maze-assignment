@@ -41,16 +41,14 @@ namespace Assignment3
         const int WALL_MIN_X = -40;
         const int WALL_MAX_Z = 40;
         const int WALL_WIDTH = 80;
-
-        Matrix projection;
-        Matrix view;
         BoundingBox[,] mazeBoxes;
         int[,] mazeLayout;
-        BoundingBox camBox;
+        BoundingSphere camBox;
         Boolean collided;
 
         FirstPersonCamera camera;
         Vector3 startingPosition;
+        Vector3 prevCamPosition;
 
         public Game1()
         {
@@ -92,6 +90,8 @@ namespace Assignment3
             mazeBoxes = new BoundingBox[MAZE_X, MAZE_Y];
             startingPosition = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * 1), 50, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (MAZE_Y - 2)));
             camera.Position = startingPosition;
+            camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
+            camBox = new BoundingSphere(camera.Position, 4);
             base.Initialize();
         }
 
@@ -140,10 +140,20 @@ namespace Assignment3
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            collided = false;
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
+                || Keyboard.GetState().IsKeyDown(Keys.Home))
+            {
+                camera.Position = startingPosition;
+                camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
+            }
+
             for(int i = 0; i < MAZE_X; i++)
             {
                 for (int j = 0; j < MAZE_Y; j++)
@@ -152,11 +162,9 @@ namespace Assignment3
                 }
             }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Home))
+            if (!collided)
             {
-                camera.Position = startingPosition;
-                camera.Orientation = Quaternion.Identity;
+                prevCamPosition = camera.Position;
             }
 
             base.Update(gameTime);
@@ -261,25 +269,27 @@ namespace Assignment3
             return box;
         }
 
-        private BoundingBox UpdateBox(BoundingBox box)
+        private BoundingSphere UpdateBox(BoundingSphere box)
         {
-            Vector3[] boxCorners = box.GetCorners();
-            for (int i = 0; i < boxCorners.Length; i++)
-            {
-                boxCorners[i].X *= camera.Position.X;
-                boxCorners[i].Y *= camera.Position.Y;
-                boxCorners[i].Z *= camera.Position.Z;
-            }
+            box.Center = camera.Position;
+            //Vector3[] boxCorners = box.GetCorners();
+            //for (int i = 0; i < boxCorners.Length; i++)
+            //{
+            //    boxCorners[i].X += camera.Position.X;
+            //    boxCorners[i].Y += camera.Position.Y;
+            //    boxCorners[i].Z += camera.Position.Z;
+            //}
 
-            BoundingBox newbox = BoundingBox.CreateFromPoints(boxCorners);
-            return newbox;
+            //BoundingBox newbox = BoundingBox.CreateFromPoints(boxCorners);
+            return box;
         }
 
-        private void CollisionCheck(BoundingBox cam, BoundingBox wall)
+        private void CollisionCheck(BoundingSphere cam, BoundingBox wall)
         {
             if (cam.Intersects(wall))
             {
                 collided = true;
+                camera.Position = prevCamPosition;
             }            
         }
     }

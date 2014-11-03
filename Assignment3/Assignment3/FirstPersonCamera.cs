@@ -76,7 +76,6 @@ namespace Assignment3
         private Matrix projMatrix;
 
         private Posture posture;
-        private Posture prevPosture;
         private float rotationSpeed;
 
         private InputManager inputManager;
@@ -745,24 +744,6 @@ namespace Assignment3
             get { return zAxis; }
         }
 
-        public bool isJumping()
-        {
-            if (posture == Posture.Jumping || (posture == Posture.Rising && prevPosture != Posture.Crouching))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public bool isCrouching()
-        {
-            if (posture == Posture.Crouching)
-            {
-                return true;
-            }
-
-            return false;
-        }
     #endregion
     }
 }
