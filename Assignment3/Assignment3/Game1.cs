@@ -38,22 +38,21 @@ namespace Assignment3
         const int WALL_MIN_X = -40;
         const int WALL_MAX_Z = 40;
         const int WALL_WIDTH = 80;
-        float camRotX;
-        float camRotY;
-        float camRotZ;
-        int camX;
-        int camY;
-        int camZ;
 
         Matrix projection;
         Matrix view;
         BoundingBox[,] mazeBoxes;
         int[,] mazeLayout;
 
+        FirstPersonCamera camera;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            camera = new FirstPersonCamera(this);
+            Components.Add(camera);
         }
 
         /// <summary>
@@ -84,7 +83,7 @@ namespace Assignment3
             //                {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
             //                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
             mazeBoxes = new BoundingBox[MAZE_X, MAZE_Y];
-
+            camera.Position =  new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * 1), 50, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * 8));
             base.Initialize();
         }
 
@@ -106,12 +105,8 @@ namespace Assignment3
             ceilingDiffuse = Content.Load<Texture2D>(@"Texture\pavers1d2");
             floorDiffuse = Content.Load<Texture2D>(@"Texture\pavers1d2");
 
-            projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
-                (float)this.Window.ClientBounds.Width / (float)this.Window.ClientBounds.Height,
-                1.0f, 10.0f);
-            effect.Projection = projection;
-            view = Matrix.CreateTranslation(camX, camY, camZ);
-            effect.View = view;
+            effect.Projection = camera.ProjectionMatrix;
+            effect.View = camera.ViewMatrix;
         }
 
         /// <summary>
@@ -134,57 +129,6 @@ namespace Assignment3
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-
-            // TODO: Add your update logic here
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                camZ++;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                camZ--;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                camX++;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                camX--;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                camY--;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
-            {
-                camY++;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                camRotY += 0.5f;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                camRotY -= 0.5f;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                camRotX += 0.5f;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                camRotX -= 0.5f; ;
-            }
 
             base.Update(gameTime);
         }
@@ -235,19 +179,7 @@ namespace Assignment3
         private void DrawModel(Model m, Texture2D t, Vector3 pos)
         {
             Matrix[] transforms = new Matrix[m.Bones.Count];
-            float aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
             m.CopyAbsoluteBoneTransformsTo(transforms);
-            Matrix projection =
-                Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
-                aspectRatio, 1.0f, 10000.0f);
-            Matrix view =
-                //Matrix.CreateRotationX(camRotX) 
-                //* Matrix.CreateRotationY(camRotY) 
-                //* Matrix.CreateRotationZ(camRotZ) 
-                //* Matrix.CreateTranslation(camX, camY, camZ); 
-                Matrix.CreateLookAt(new Vector3(camRotX, camRotY, camRotZ),
-                Vector3.Zero, Vector3.Up) *
-                Matrix.CreateTranslation(camX, camY, camZ);
 
             foreach (ModelMesh mesh in m.Meshes)
             {
@@ -256,8 +188,8 @@ namespace Assignment3
                     effect.TextureEnabled = true;
                     effect.Texture = t;
 
-                    effect.View = view;
-                    effect.Projection = projection;
+                    effect.View = camera.ViewMatrix;
+                    effect.Projection = camera.ProjectionMatrix;
                     effect.World = gameWorldRotation *
                         transforms[mesh.ParentBone.Index] *
                         Matrix.CreateTranslation(pos);

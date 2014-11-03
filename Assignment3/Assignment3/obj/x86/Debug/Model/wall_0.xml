@@ -3,7 +3,7 @@
   <Asset Type="Graphics:MeshContent">
     <Name>cube</Name>
     <Identity>
-      <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\Assignment3\Assignment3Content\Model\wall.fbx</SourceFilename>
+      <SourceFilename>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3Content\Model\wall.fbx</SourceFilename>
       <SourceTool>FbxImporter</SourceTool>
     </Identity>
     <Transform>10 0 0 0 0 10 0 0 0 0 10 0 0 40 0 1</Transform>
@@ -32,7 +32,7 @@
     <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
       <Name>Scene_Root</Name>
       <Identity>
-        <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\Assignment3\Assignment3Content\Model\wall.fbx</SourceFilename>
+        <SourceFilename>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3Content\Model\wall.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
