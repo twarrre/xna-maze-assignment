@@ -55,8 +55,6 @@ namespace Assignment3
             float x = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
             float y = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
 
-            i.SetClap(GamePad.GetState(PlayerIndex.One).Triggers.Right);
-
             if (x > 0)
             {
                 i.SetRight(x);
@@ -78,11 +76,6 @@ namespace Assignment3
             if (previousGamePadState.IsButtonUp(Buttons.A) && currentGamePadState.IsButtonDown(Buttons.A))
             {
                 i.SetJumping(true);
-            }
-
-            if (previousGamePadState.Buttons.RightShoulder == ButtonState.Released && currentGamePadState.Buttons.RightShoulder == ButtonState.Pressed)
-            {
-                i.SetClapping(true);
             }
 
             if (currentGamePadState.IsButtonDown(Buttons.LeftShoulder))
@@ -175,11 +168,6 @@ namespace Assignment3
 
             i.AddViewX((float)deltaX);
             i.AddViewY((float)deltaY);
-
-            if (previousMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
-            {
-                i.SetClapping(true);
-            }
         }
     }
 }

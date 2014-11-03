@@ -661,6 +661,7 @@ namespace Assignment3
         public Quaternion Orientation
         {
             get { return orientation; }
+            set { orientation = value; }
         }
 
         public float PitchDegrees

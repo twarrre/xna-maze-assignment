@@ -24,10 +24,13 @@ namespace Assignment3
         Model floor;
         Model ceiling;
         Model wall;
+        Model home;
 
         Texture2D wallDiffuse;
         Texture2D ceilingDiffuse;
         Texture2D floorDiffuse;
+        Texture2D homeDiffuse;
+
         Matrix gameWorldRotation = Matrix.Identity;
         Vector3 Position;
         Model[] walls;
@@ -47,6 +50,7 @@ namespace Assignment3
         Boolean collided;
 
         FirstPersonCamera camera;
+        Vector3 startingPosition;
 
         public Game1()
         {
@@ -86,7 +90,8 @@ namespace Assignment3
             //                {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
             //                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
             mazeBoxes = new BoundingBox[MAZE_X, MAZE_Y];
-            camera.Position =  new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * 1), 50, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * 8));
+            startingPosition = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * 1), 50, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (MAZE_Y - 2)));
+            camera.Position = startingPosition;
             base.Initialize();
         }
 
@@ -103,14 +108,19 @@ namespace Assignment3
             ceiling = Content.Load<Model>(@"Model\ceiling");
             floor = Content.Load<Model>(@"Model\floor");
             wall = Content.Load<Model>(@"Model\wall");
+            home = Content.Load<Model>(@"Model\home");
 
             wallDiffuse = Content.Load<Texture2D>(@"Texture\walltexture");
             ceilingDiffuse = Content.Load<Texture2D>(@"Texture\pavers1d2");
             floorDiffuse = Content.Load<Texture2D>(@"Texture\pavers1d2");
+            homeDiffuse = Content.Load<Texture2D>(@"Texture\home");
 
+            effect.AmbientLightColor = new Vector3(1f, 1f, 1f);
+            effect.DiffuseColor = new Vector3(0.1f, 0.1f, 0.1f);
             effect.Projection = camera.ProjectionMatrix;
             effect.View = camera.ViewMatrix;
-            
+            effect.LightingEnabled = true;
+
             BuildMaze(wall, wallDiffuse, mazeLayout);
         }
 
@@ -142,6 +152,13 @@ namespace Assignment3
                 }
             }
 
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
+                || Keyboard.GetState().IsKeyDown(Keys.Home))
+            {
+                camera.Position = startingPosition;
+                camera.Orientation = Quaternion.Identity;
+            }
+
             base.Update(gameTime);
         }
 
@@ -153,7 +170,7 @@ namespace Assignment3
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, mazeLayout);
+            DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, home, homeDiffuse, mazeLayout);
 
             base.Draw(gameTime);
         }
@@ -172,10 +189,11 @@ namespace Assignment3
             }
         }
 
-        private void DrawMaze(Model w, Texture2D wt, Model f, Texture2D ft, Model c, Texture2D ct, int[,] maze)
+        private void DrawMaze(Model w, Texture2D wt, Model f, Texture2D ft, Model c, Texture2D ct, Model h, Texture2D ht, int[,] maze)
         {
             DrawModel(f, ft, new Vector3(0, 0, 0));
             DrawModel(c, ct, new Vector3(0, 0, 0));
+            DrawModel(h, ht, startingPosition - new Vector3(0, 49, 0));
             for (int x = 0; x < MAZE_X; x++)
             {
                 for (int y = 0; y < MAZE_Y; y++)
