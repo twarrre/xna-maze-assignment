@@ -20,6 +20,7 @@ namespace Assignment3
         SpriteBatch spriteBatch;
 
         BasicEffect effect;
+        Effect customeffect;
 
         Model floor;
         Model ceiling;
@@ -49,6 +50,8 @@ namespace Assignment3
         FirstPersonCamera camera;
         Vector3 startingPosition;
         Vector3 prevCamPosition;
+
+        Vector3 viewVector;
 
         Boolean collisionOn;
 
@@ -117,6 +120,7 @@ namespace Assignment3
             spriteBatch = new SpriteBatch(GraphicsDevice);
             effect = new BasicEffect(graphics.GraphicsDevice);
 
+            customeffect = Content.Load<Effect>(@"Effects\Ambient");
             ceiling = Content.Load<Model>(@"Model\ceiling");
             floor = Content.Load<Model>(@"Model\floor");
             wall = Content.Load<Model>(@"Model\wall");
@@ -133,7 +137,13 @@ namespace Assignment3
             effect.View = camera.ViewMatrix;
             effect.LightingEnabled = true;
 
+            customeffect.Parameters["AmbientColor"].SetValue(Color.Orange.ToVector4());
+            customeffect.Parameters["AmbientIntensity"].SetValue(0.2f);
+
             BuildMaze(wall, wallDiffuse, mazeLayout);
+
+            viewVector = Vector3.Transform(camera.ViewDirection - camera.Position, Matrix.CreateRotationY(0));
+            viewVector.Normalize();
         }
 
         /// <summary>
@@ -227,7 +237,7 @@ namespace Assignment3
         private void DrawMaze(Model w, Texture2D wt, Model f, Texture2D ft, Model c, Texture2D ct, Model h, Texture2D ht, int[,] maze)
         {
             DrawModel(f, ft, new Vector3(0, 0, 0));
-            DrawModel(c, ct, new Vector3(0, 0, 0));
+            //DrawModel(c, ct, new Vector3(0, 0, 0));
             DrawModel(h, ht, startingPosition - new Vector3(0, 49, 0));
             for (int x = 0; x < MAZE_X; x++)
             {
@@ -248,17 +258,28 @@ namespace Assignment3
 
             foreach (ModelMesh mesh in m.Meshes)
             {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.TextureEnabled = true;
-                    effect.Texture = t;
-
-                    effect.View = camera.ViewMatrix;
-                    effect.Projection = camera.ProjectionMatrix;
-                    effect.World = gameWorldRotation *
-                        transforms[mesh.ParentBone.Index] *
-                        Matrix.CreateTranslation(pos);
+                foreach (ModelMeshPart part in mesh.MeshParts)
+                {                    
+                    part.Effect = customeffect;
+                    customeffect.Parameters["World"].SetValue(gameWorldRotation * transforms[mesh.ParentBone.Index] * Matrix.CreateTranslation(pos));
+                    customeffect.Parameters["View"].SetValue(camera.ViewMatrix);
+                    customeffect.Parameters["Projection"].SetValue(camera.ProjectionMatrix);
+                    Matrix worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(transforms[mesh.ParentBone.Index] * gameWorldRotation));
+                    customeffect.Parameters["WorldInverseTranspose"].SetValue(worldInverseTransposeMatrix);
+                    customeffect.Parameters["ViewVector"].SetValue(viewVector);
+                    customeffect.Parameters["ModelTexture"].SetValue(t);
                 }
+                //foreach (BasicEffect effect in mesh.Effects)
+                //{
+                //    effect.TextureEnabled = true;
+                //    effect.Texture = t;
+
+                //    effect.View = camera.ViewMatrix;
+                //    effect.Projection = camera.ProjectionMatrix;
+                //    effect.World = gameWorldRotation *
+                //        transforms[mesh.ParentBone.Index] *
+                //        Matrix.CreateTranslation(pos);
+                //}
                 mesh.Draw();
             }
         }
