@@ -54,6 +54,7 @@ namespace Assignment3
         Vector3 viewVector;
 
         Boolean collisionOn;
+        Boolean fogOn;
 
         private KeyboardState currentKeyboardState;
         private KeyboardState previousKeyboardState;
@@ -84,6 +85,7 @@ namespace Assignment3
             mazeLayout = m.ToIntMap();
             collided = false;
             collisionOn = true;
+            fogOn = false;
 
             // TODO: Add your initialization logic here
 
@@ -139,6 +141,9 @@ namespace Assignment3
 
             customeffect.Parameters["AmbientColor"].SetValue(Color.Orange.ToVector4());
             customeffect.Parameters["AmbientIntensity"].SetValue(0.2f);
+            customeffect.Parameters["FogColor"].SetValue(Color.Orange.ToVector4());
+            camera.setClippingFar(1000.0f);
+            customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
 
             BuildMaze(wall, wallDiffuse, mazeLayout);
 
@@ -187,6 +192,22 @@ namespace Assignment3
                 collisionOn = !collisionOn;
             }
 
+            if (((previousGamePadState.Buttons.X == ButtonState.Released) && (currentGamePadState.Buttons.X == ButtonState.Pressed))
+                || ((currentKeyboardState.IsKeyDown(Keys.F) && previousKeyboardState.IsKeyUp(Keys.F))))
+            {
+                fogOn = !fogOn;
+            }
+
+            if (fogOn)
+            {
+                camera.setClippingFar(300.0f);
+                customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
+            }
+            else
+            {
+                camera.setClippingFar(1000.0f);
+                customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
+            }
 
             if (collisionOn)
             {
@@ -213,7 +234,7 @@ namespace Assignment3
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Orange);
 
             DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, home, homeDiffuse, mazeLayout);
 
@@ -268,6 +289,7 @@ namespace Assignment3
                     customeffect.Parameters["WorldInverseTranspose"].SetValue(worldInverseTransposeMatrix);
                     customeffect.Parameters["ViewVector"].SetValue(viewVector);
                     customeffect.Parameters["ModelTexture"].SetValue(t);
+                    customeffect.Parameters["FogEnabled"].SetValue(fogOn);
                 }
                 //foreach (BasicEffect effect in mesh.Effects)
                 //{

@@ -15,6 +15,10 @@ float4 SpecularColor = float4(1, 1, 1, 1);
 float SpecularIntensity = 1;
 float3 ViewVector = float3(1, 0, 0);
 
+float FarPlane;
+float4 FogColor;
+bool FogEnabled;
+
 texture ModelTexture;
 sampler2D textureSampler = sampler_state {
     Texture = (ModelTexture);
@@ -41,6 +45,7 @@ struct VertexShaderOutput
 	float4 Color : COLOR0;
 	float3 Normal : TEXCOORD0;
 	float2 TextureCoordinate : TEXCOORD1;
+	float ViewSpaceZ : TEXCOORD3;
 
     // TODO: add vertex shader outputs such as colors and texture
     // coordinates here. These values will automatically be interpolated
@@ -61,6 +66,7 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 
 	output.Normal = normal;
 	output.TextureCoordinate = input.TextureCoordinate;
+	output.ViewSpaceZ = (output.Position.z) / FarPlane;
     // TODO: add your vertex shader code here.
 
     return output;
@@ -68,6 +74,9 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
+	const float FOG_MIN = 0.69;
+    const float FOG_MAX = 0.99;
+
 	float3 light = normalize(DiffuseLightDirection);
     float3 normal = normalize(input.Normal);
     float3 r = normalize(2 * dot(light, normal) * normal - light);
@@ -80,7 +89,11 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	textureColor.a = 1;
     // TODO: add your pixel shader code here.
 
-    return saturate(textureColor * (input.Color) + AmbientColor * AmbientIntensity + specular);
+	if(FogEnabled)
+		return lerp(saturate(textureColor * (input.Color) + AmbientColor * AmbientIntensity + specular), FogColor, lerp(FOG_MIN, FOG_MAX, input.ViewSpaceZ));
+	else
+		return saturate(textureColor * (input.Color) + AmbientColor * AmbientIntensity + specular);
+    //return saturate(textureColor * (input.Color) + AmbientColor * AmbientIntensity + specular);
 }
 
 technique Ambient

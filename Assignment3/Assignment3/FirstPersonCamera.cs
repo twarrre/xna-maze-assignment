@@ -29,7 +29,7 @@ namespace Assignment3
 
         public const float DEFAULT_FOVX = 90.0f;
         public const float DEFAULT_ZNEAR = 0.1f;
-        public const float DEFAULT_ZFAR = 1000.0f;
+        public const float DEFAULT_ZFAR = 300.0f;
 
         private static Vector3 WORLD_X_AXIS = new Vector3(1.0f, 0.0f, 0.0f);
         private static Vector3 WORLD_Y_AXIS = new Vector3(0.0f, 1.0f, 0.0f);
@@ -75,6 +75,7 @@ namespace Assignment3
         private Quaternion orientation;
         private Matrix viewMatrix;
         private Matrix projMatrix;
+        private float aspect;
 
         private Posture posture;
         private float rotationSpeed;
@@ -117,7 +118,7 @@ namespace Assignment3
 
             // Setup perspective projection matrix.
             Rectangle clientBounds = game.Window.ClientBounds;
-            float aspect = (float)clientBounds.Width / (float)clientBounds.Height;
+            aspect = (float)clientBounds.Width / (float)clientBounds.Height;
             Perspective(fovx, aspect, znear, zfar);
 
             inputManager = new InputManager();
@@ -405,7 +406,7 @@ namespace Assignment3
                     zoomFactor += 0.1f;
                 }
             }
-            else
+            else if (i.IsZoomingOut()) 
             {
                 if (zoomFactor > 1.0f)
                 {
@@ -637,6 +638,16 @@ namespace Assignment3
             viewMatrix *= Matrix.CreateScale(zoomFactor, zoomFactor, 1);
         }
 
+        public float getClippingFar()
+        {
+            return zfar;
+        }
+
+        public void setClippingFar(float f)
+        {
+            zfar = f;
+            Perspective(fovx, aspect, znear, zfar);
+        }
 
     #region Properties
 

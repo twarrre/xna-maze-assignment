@@ -17,6 +17,7 @@ namespace Assignment3
         private bool sprint;
         private bool slide;
         private bool zoom;
+        private bool revZoom;
 
         private float mouseX;
         private float mouseY;
@@ -33,6 +34,7 @@ namespace Assignment3
             sprint = false;
             slide = false;
             zoom = false;
+            revZoom = false;
 
             mouseX = 0;
             mouseY = 0;
@@ -48,6 +50,7 @@ namespace Assignment3
         public bool IsSprinting() { return sprint; }
         public bool IsSliding() { return slide; }
         public bool IsZooming() { return zoom; }
+        public bool IsZoomingOut() { return revZoom; }
 
         public float GetViewX() { return mouseX; }
         public float GetViewY() { return mouseY; }
@@ -62,6 +65,7 @@ namespace Assignment3
         public void SetSprinting(bool s) { sprint = s; }
         public void SetSliding(bool s) { slide = s; }
         public void SetZoom(bool z) { zoom = z; }
+        public void SetZoomOut(bool z) { revZoom = z; }
 
         public void SetViewX(float x) { mouseX = x; }
         public void SetViewY(float Y) { mouseY = Y; }

@@ -104,6 +104,16 @@ namespace Assignment3
                 i.SetCrouching(false);
                 i.SetSprinting(false);
             }
+
+            if (currentGamePadState.IsButtonDown(Buttons.B) && previousGamePadState.IsButtonDown(Buttons.B))
+            {
+                i.SetZoom(true);
+            }
+
+            if (currentGamePadState.IsButtonDown(Buttons.A) && previousGamePadState.IsButtonDown(Buttons.A))
+            {
+                i.SetZoomOut(true);
+            }
         }
 
         private void ProcessKeyboard(ref Input i)
@@ -153,9 +163,14 @@ namespace Assignment3
                 i.SetCrouching(false);
             }
 
-            if (currentKeyboardState.IsKeyDown(Keys.Z))
+            if (currentKeyboardState.IsKeyDown(Keys.Z) && currentKeyboardState.IsKeyUp(Keys.LeftShift) && previousKeyboardState.IsKeyUp(Keys.Z))
             {
                 i.SetZoom(true);
+            }
+
+            if (currentKeyboardState.IsKeyDown(Keys.Z) && currentKeyboardState.IsKeyDown(Keys.LeftShift) && previousKeyboardState.IsKeyUp(Keys.Z))
+            {
+                i.SetZoomOut(true);
             }
         }
 
