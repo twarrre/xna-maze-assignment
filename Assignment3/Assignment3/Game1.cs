@@ -194,7 +194,7 @@ namespace Assignment3
                 {
                     for (int j = 0; j < MAZE_Y; j++)
                     {
-                        CollisionCheck(UpdateBox(camBox), mazeBoxes[i, j]);
+                        CollisionCheck(UpdateBox(camBox), mazeBoxes[i, j], i, j);
                     }
                 }
             }
@@ -332,13 +332,42 @@ namespace Assignment3
             return box;
         }
 
-        private void CollisionCheck(BoundingSphere cam, BoundingBox wall)
+        private void CollisionCheck(BoundingSphere cam, BoundingBox wall, int x, int z)
         {
             if (cam.Intersects(wall))
             {
                 collided = true;
-                camera.Position = prevCamPosition;
-            }            
+                Vector3 pos = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * x), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * z));
+                int camX = (int)Math.Round(Math.Abs(-((camera.Position.X - maze_min_x + WALL_MIN_X) / WALL_WIDTH)));
+                int camZ = (int)Math.Round(Math.Abs((camera.Position.Z - maze_max_z + WALL_MAX_Z) / WALL_WIDTH));
+
+                Vector3 newVector = camera.Position;
+
+                if (x == camX)
+                {
+                    if (camZ > z)
+                    {
+                        newVector.Z = pos.Z - 40 - 4;
+                    }
+                    else if (camZ < z)
+                    {
+                        newVector.Z = pos.Z + 40 + 4;
+                    }
+                }
+
+                if (z == camZ)
+                {
+                    if (camX < x)
+                    {
+                        newVector.X = pos.X - 40 - 4;
+                    }
+                    else if (camX > x)
+                    {
+                        newVector.X = pos.X + 40 + 4;
+                    }
+                }
+                camera.Position = newVector;
+            }
         }
     }
 }
