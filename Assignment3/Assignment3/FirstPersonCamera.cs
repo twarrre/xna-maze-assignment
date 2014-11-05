@@ -649,6 +649,16 @@ namespace Assignment3
             Perspective(fovx, aspect, znear, zfar);
         }
 
+        public float getZoom()
+        {
+            return zoomFactor;
+        }
+
+        public void resetZoom()
+        {
+            zoomFactor = 1.0f;
+        }
+
     #region Properties
 
         public Vector3 Acceleration

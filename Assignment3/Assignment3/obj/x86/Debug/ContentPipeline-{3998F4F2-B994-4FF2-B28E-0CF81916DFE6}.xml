@@ -104,15 +104,6 @@
       <Time>2014-11-04T19:45:55.4213655-08:00</Time>
     </Item>
     <Item>
-      <Source>Effects\Fog.fx</Source>
-      <Name>Effects\Fog</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Effects\Fog.xnb</Output>
-      <Time>2014-11-04T19:20:06.0047987-08:00</Time>
-    </Item>
-    <Item>
       <Source>Model\ceiling.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>

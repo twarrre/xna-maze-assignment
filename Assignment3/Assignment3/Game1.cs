@@ -184,6 +184,9 @@ namespace Assignment3
             {
                 camera.Position = startingPosition;
                 camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
+                fogOn = false;
+                collisionOn = true;
+                camera.resetZoom();
             }
 
             if (((previousGamePadState.Buttons.Y == ButtonState.Released) && (currentGamePadState.Buttons.Y == ButtonState.Pressed))
