@@ -132,7 +132,9 @@ namespace Assignment3
             base.Initialize();
 
             Rectangle clientBounds = Game.Window.ClientBounds;
+#if WINDOWS
             Mouse.SetPosition(clientBounds.Width / 2, clientBounds.Height / 2);
+#endif
         }
 
         /// <summary>
@@ -145,11 +147,6 @@ namespace Assignment3
         /// <param name="dz">Distance to move forwards or backwards.</param>
         public void Move(float dx, float dy, float dz)
         {
-            // Calculate the forwards direction. Can't just use the
-            // camera's view direction as doing so will cause the camera to
-            // move more slowly as the camera's view approaches 90 degrees
-            // straight up and down.
-
             Vector3 forwards = Vector3.Normalize(Vector3.Cross(WORLD_Y_AXIS, xAxis));
 
             eye += xAxis * dx;
@@ -430,21 +427,10 @@ namespace Assignment3
         {
             if (currentVelocity.LengthSquared() != 0.0f)
             {
-                // Only move the camera if the velocity vector is not of zero
-                // length. Doing this guards against the camera slowly creeping
-                // around due to floating point rounding errors.
 
                 Vector3 displacement = (currentVelocity * elapsedTimeSec) +
                     (0.5f * acceleration * elapsedTimeSec * elapsedTimeSec);
 
-                // Floating point rounding errors will slowly accumulate and
-                // cause the camera to move along each axis. To prevent any
-                // unintended movement the displacement vector is clamped to
-                // zero for each direction that the camera isn't moving in.
-                // Note that the UpdateVelocity() method will slowly decelerate
-                // the camera's velocity back to a stationary state when the
-                // camera is no longer moving along that direction. To account
-                // for this the camera's current velocity is also checked.
 
                 if (direction.X == 0.0f && (float)Math.Abs(currentVelocity.X) < 1e-6f)
                     displacement.X = 0.0f;

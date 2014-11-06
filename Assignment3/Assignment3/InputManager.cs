@@ -40,7 +40,9 @@ namespace Assignment3
         {
             Input i = new Input();
 
+#if WINDOWS
             ProcessMouse(ref i, client);
+#endif
             ProcessController(ref i);
             ProcessKeyboard(ref i);
 
@@ -73,7 +75,7 @@ namespace Assignment3
                 i.SetBackward(y);
             }
 
-            if (previousGamePadState.IsButtonUp(Buttons.A) && currentGamePadState.IsButtonDown(Buttons.A))
+            if (previousGamePadState.IsButtonUp(Buttons.RightStick) && currentGamePadState.IsButtonDown(Buttons.RightStick))
             {
                 i.SetJumping(true);
             }
@@ -105,12 +107,12 @@ namespace Assignment3
                 i.SetSprinting(false);
             }
 
-            if (currentGamePadState.IsButtonDown(Buttons.B) && previousGamePadState.IsButtonDown(Buttons.B))
+            if (currentGamePadState.IsButtonDown(Buttons.B) && previousGamePadState.IsButtonUp(Buttons.B))
             {
                 i.SetZoom(true);
             }
 
-            if (currentGamePadState.IsButtonDown(Buttons.A) && previousGamePadState.IsButtonDown(Buttons.A))
+            if (currentGamePadState.IsButtonDown(Buttons.A) && previousGamePadState.IsButtonUp(Buttons.A))
             {
                 i.SetZoomOut(true);
             }

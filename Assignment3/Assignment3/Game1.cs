@@ -194,6 +194,9 @@ namespace Assignment3
             {
                 camera.Position = startingPosition;
                 camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
+                fogOn = false;
+                collisionOn = true;
+                camera.resetZoom();
             }
 
             if (((previousGamePadState.Buttons.Y == ButtonState.Released) && (currentGamePadState.Buttons.Y == ButtonState.Pressed))
@@ -208,8 +211,8 @@ namespace Assignment3
                 fogOn = !fogOn;
             }
 
-            if (/*((previousGamePadState.Buttons.X == ButtonState.Released) && (currentGamePadState.Buttons.X == ButtonState.Pressed))
-                ||*/ ((currentKeyboardState.IsKeyDown(Keys.D) && previousKeyboardState.IsKeyUp(Keys.D))))
+            if (((previousGamePadState.Buttons.RightShoulder == ButtonState.Released) && (currentGamePadState.Buttons.RightShoulder == ButtonState.Pressed))
+                || ((currentKeyboardState.IsKeyDown(Keys.D) && previousKeyboardState.IsKeyUp(Keys.D))))
             {
                 day = !day;
             }
