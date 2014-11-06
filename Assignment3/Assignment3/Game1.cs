@@ -149,7 +149,8 @@ namespace Assignment3
             customeffect.Parameters["DiffuseLightRadius"].SetValue(0.8f);
             customeffect.Parameters["DiffuseLightAngleCosine"].SetValue(0.6f);
             customeffect.Parameters["DiffuseLightDecayExponent"].SetValue(20);
-            customeffect.Parameters["DiffuseIntensity"].SetValue(6.0f);
+            customeffect.Parameters["DiffuseIntensity"].SetValue(1.0f);
+            customeffect.Parameters["DaylightIntensity"].SetValue(1.5f);
 
 
             BuildMaze(wall, wallDiffuse, mazeLayout);
@@ -219,13 +220,13 @@ namespace Assignment3
 
             if (day)
             {
-                customeffect.Parameters["AmbientColor"].SetValue(Color.White.ToVector4());
-                customeffect.Parameters["AmbientIntensity"].SetValue(0.2f);
+                customeffect.Parameters["DayEnabled"].SetValue(true);
+                customeffect.Parameters["DiffuseLightDecayExponent"].SetValue(0.5f);
             }
             else
             {
-                customeffect.Parameters["AmbientColor"].SetValue(Color.Black.ToVector4());
-                customeffect.Parameters["AmbientIntensity"].SetValue(1.0f);
+                customeffect.Parameters["DayEnabled"].SetValue(false);
+                customeffect.Parameters["DiffuseLightDecayExponent"].SetValue(20);
             }
 
             if (fogOn)
@@ -266,13 +267,12 @@ namespace Assignment3
         {
             if (day)
             {
-                GraphicsDevice.Clear(Color.CornflowerBlue);
+                GraphicsDevice.Clear(Color.SkyBlue);
             }
             else
             {
                 GraphicsDevice.Clear(Color.Black);
             }
-
             DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, home, homeDiffuse, mazeLayout);
 
             base.Draw(gameTime);
@@ -295,7 +295,7 @@ namespace Assignment3
         private void DrawMaze(Model w, Texture2D wt, Model f, Texture2D ft, Model c, Texture2D ct, Model h, Texture2D ht, int[,] maze)
         {
             DrawModel(f, ft, new Vector3(0, 0, 0));
-            DrawModel(c, ct, new Vector3(0, 0, 0));
+            //DrawModel(c, ct, new Vector3(0, 0, 0));
             DrawModel(h, ht, startingPosition - new Vector3(0, 49, 0));
             for (int x = 0; x < MAZE_X; x++)
             {

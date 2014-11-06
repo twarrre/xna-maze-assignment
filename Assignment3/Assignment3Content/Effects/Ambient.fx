@@ -22,6 +22,8 @@ float3 ViewVector = float3(1, 0, 0);
 float FarPlane;
 float4 FogColor;
 bool FogEnabled;
+bool DayEnabled;
+float DaylightIntensity;
 
 texture ModelTexture;
 sampler2D textureSampler = sampler_state {
@@ -119,9 +121,15 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 		spotIntensity
 		// * attenuation 
 		* DiffuseColor
-		//* DiffuseIntensity 
+		* DiffuseIntensity 
 		* textureColor * diff + SpecularIntensity * SpecularColor * specular;
 	}
+
+	if(DayEnabled)
+	{
+		finalColor = saturate(finalColor * DaylightIntensity);
+	}
+
 
 	if(FogEnabled)
 		return lerp(finalColor, FogColor, lerp(FOG_MIN, FOG_MAX, input.ViewSpaceZ));
