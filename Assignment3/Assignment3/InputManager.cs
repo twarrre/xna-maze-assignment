@@ -75,11 +75,6 @@ namespace Assignment3
                 i.SetBackward(y);
             }
 
-            if (previousGamePadState.IsButtonUp(Buttons.RightStick) && currentGamePadState.IsButtonDown(Buttons.RightStick))
-            {
-                i.SetJumping(true);
-            }
-
             if (currentGamePadState.IsButtonDown(Buttons.LeftShoulder))
             {
                 i.SetCrouching(true);
@@ -141,11 +136,6 @@ namespace Assignment3
             if (currentKeyboardState.IsKeyDown(Keys.Right))
             {
                 i.SetRight(1.0f);
-            }
-
-            if (previousKeyboardState.IsKeyUp(Keys.Space) && currentKeyboardState.IsKeyDown(Keys.Space))
-            {
-                i.SetJumping(true);
             }
 
             if (currentKeyboardState.IsKeyDown(Keys.C))

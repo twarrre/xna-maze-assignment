@@ -116,7 +116,7 @@ namespace Assignment3
             home = Content.Load<Model>(@"Model\home");
 
             wallDiffuse = Content.Load<Texture2D>(@"Texture\walltexture");
-            ceilingDiffuse = Content.Load<Texture2D>(@"Texture\pavers1d2");
+            ceilingDiffuse = Content.Load<Texture2D>(@"Texture\stone");
             floorDiffuse = Content.Load<Texture2D>(@"Texture\pavers1d2");
             homeDiffuse = Content.Load<Texture2D>(@"Texture\home");
 
@@ -177,7 +177,6 @@ namespace Assignment3
                 || currentKeyboardState.IsKeyDown(Keys.Home))
             {
                 camera.Position = startingPosition;
-                camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
                 fogOn = false;
                 collisionOn = true;
                 camera.resetZoom();

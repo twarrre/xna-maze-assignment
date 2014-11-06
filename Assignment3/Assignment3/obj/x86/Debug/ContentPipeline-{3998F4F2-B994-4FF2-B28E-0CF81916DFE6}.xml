@@ -154,6 +154,15 @@
       <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\chicken_diffuse_0.xnb</Output>
       <Time>2014-11-06T11:45:04.4831302-08:00</Time>
     </Item>
+    <Item>
+      <Source>Texture\stone.jpg</Source>
+      <Name>Texture\stone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\stone.xnb</Output>
+      <Time>2014-11-06T13:51:56.3683193-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3998F4F2-B994-4FF2-B28E-0CF81916DFE6}</ContentProjectGUID>
