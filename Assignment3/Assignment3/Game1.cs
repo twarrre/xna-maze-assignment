@@ -33,8 +33,6 @@ namespace Assignment3
         Texture2D homeDiffuse;
 
         Matrix gameWorldRotation = Matrix.Identity;
-        Vector3 Position;
-        Model[] walls;
         const int MAZE_X = 10;
         const int MAZE_Y = 10;
         int maze_min_x;
@@ -89,19 +87,6 @@ namespace Assignment3
             fogOn = false;
             day = true;
 
-            // TODO: Add your initialization logic here
-
-            //            mazeLayout = new int[MAZE_X, MAZE_Y]
-            //               {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-            //                {1, 1, 0, 1, 1, 0, 1, 0, 1, 1},
-            //                {1, 0, 1, 0, 1, 0, 0, 0, 0, 1},
-            //                {1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
-            //                {1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
-            //                {1, 0, 1, 0, 1, 0, 1, 1, 0, 1},
-            //                {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-            //                {1, 0, 1, 0, 0, 1, 1, 0, 1, 1},
-            //                {1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-            //                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
             mazeBoxes = new BoundingBox[MAZE_X, MAZE_Y];
             startingPosition = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * 1), 50, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (MAZE_Y - 2)));
             camera.Position = startingPosition;
@@ -141,8 +126,6 @@ namespace Assignment3
             effect.View = camera.ViewMatrix;
             effect.LightingEnabled = true;
 
-            //customeffect.Parameters["AmbientColor"].SetValue(Color.Orange.ToVector4());
-            //customeffect.Parameters["AmbientIntensity"].SetValue(0.2f);
             customeffect.Parameters["FogColor"].SetValue(Color.White.ToVector4());
             camera.setClippingFar(1000.0f);
             customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
@@ -231,7 +214,7 @@ namespace Assignment3
 
             if (fogOn)
             {
-                camera.setClippingFar(/*300.0f*/ MAZE_X * WALL_WIDTH);
+                camera.setClippingFar(300.0f /*MAZE_X * WALL_WIDTH*/);
                 customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
             }
             else
@@ -265,14 +248,9 @@ namespace Assignment3
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (day)
-            {
-                GraphicsDevice.Clear(Color.SkyBlue);
-            }
-            else
-            {
-                GraphicsDevice.Clear(Color.Black);
-            }
+
+            GraphicsDevice.Clear(Color.White);
+     
             DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, home, homeDiffuse, mazeLayout);
 
             base.Draw(gameTime);
@@ -295,7 +273,7 @@ namespace Assignment3
         private void DrawMaze(Model w, Texture2D wt, Model f, Texture2D ft, Model c, Texture2D ct, Model h, Texture2D ht, int[,] maze)
         {
             DrawModel(f, ft, new Vector3(0, 0, 0));
-            //DrawModel(c, ct, new Vector3(0, 0, 0));
+            DrawModel(c, ct, new Vector3(0, 0, 0));
             DrawModel(h, ht, startingPosition - new Vector3(0, 49, 0));
             for (int x = 0; x < MAZE_X; x++)
             {
@@ -328,17 +306,6 @@ namespace Assignment3
                     customeffect.Parameters["ModelTexture"].SetValue(t);
                     customeffect.Parameters["FogEnabled"].SetValue(fogOn);
                 }
-                //foreach (BasicEffect effect in mesh.Effects)
-                //{
-                //    effect.TextureEnabled = true;
-                //    effect.Texture = t;
-
-                //    effect.View = camera.ViewMatrix;
-                //    effect.Projection = camera.ProjectionMatrix;
-                //    effect.World = gameWorldRotation *
-                //        transforms[mesh.ParentBone.Index] *
-                //        Matrix.CreateTranslation(pos);
-                //}
                 mesh.Draw();
             }
         }
@@ -379,15 +346,6 @@ namespace Assignment3
         private BoundingSphere UpdateBox(BoundingSphere box)
         {
             box.Center = camera.Position;
-            //Vector3[] boxCorners = box.GetCorners();
-            //for (int i = 0; i < boxCorners.Length; i++)
-            //{
-            //    boxCorners[i].X += camera.Position.X;
-            //    boxCorners[i].Y += camera.Position.Y;
-            //    boxCorners[i].Z += camera.Position.Z;
-            //}
-
-            //BoundingBox newbox = BoundingBox.CreateFromPoints(boxCorners);
             return box;
         }
 
