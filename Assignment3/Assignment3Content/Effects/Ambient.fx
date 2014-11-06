@@ -7,7 +7,11 @@ float AmbientIntensity = 0.1;
 
 float4x4 WorldInverseTranspose;
 float3 DiffuseLightDirection = float3(1, 1, 1);
+float3 DiffusePosition = float3(0, 0, 0);
 float4 DiffuseColor = float4(1, 1, 1, 1);
+float DiffuseLightRadius;
+float DiffuseLightAngleCosine;
+float DiffuseLightDecayExponent;
 float DiffuseIntensity = 6.0;
 
 float Shininess = 200;
@@ -45,7 +49,8 @@ struct VertexShaderOutput
 	float4 Color : COLOR0;
 	float3 Normal : TEXCOORD0;
 	float2 TextureCoordinate : TEXCOORD1;
-	float ViewSpaceZ : TEXCOORD3;
+	float ViewSpaceZ : TEXCOORD2;
+	float3 WorldPosition : TEXCOORD3;
 
     // TODO: add vertex shader outputs such as colors and texture
     // coordinates here. These values will automatically be interpolated
@@ -67,6 +72,7 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 	output.Normal = normal;
 	output.TextureCoordinate = input.TextureCoordinate;
 	output.ViewSpaceZ = (output.Position.z) / FarPlane;
+	output.WorldPosition = worldPosition;
     // TODO: add your vertex shader code here.
 
     return output;
@@ -77,22 +83,50 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	const float FOG_MIN = 0.69;
     const float FOG_MAX = 0.99;
 
-	float3 light = normalize(DiffuseLightDirection);
-    float3 normal = normalize(input.Normal);
-    float3 r = normalize(2 * dot(light, normal) * normal - light);
-    float3 v = normalize(mul(normalize(ViewVector), World));
+	////float3 lightdir = DiffusePosition - input.WorldPosition;
+	//float attenuation = saturate(1.0f - length(DiffuseLightDirection) / DiffuseLightRadius;
+	//float3 light = normalize(DiffuseLightDirection);
+	//
+	////Specular Light stuff
+    //float3 normal = normalize(input.Normal);
+    //float3 r = normalize(2 * dot(light, normal) * normal - light);
+    //float3 v = normalize(mul(normalize(ViewVector), World));
+	//
+    //float dotProduct = dot(r, v);
+    //float4 specular = SpecularIntensity * SpecularColor * max(pow(dotProduct, Shininess), 0) * length(input.Color);
+	//
+	//float4 textureColor = tex2D(textureSampler, input.TextureCoordinate);
+	//textureColor.a = 1;
+    //// TODO: add your pixel shader code here.
 
-    float dotProduct = dot(r, v);
-    float4 specular = SpecularIntensity * SpecularColor * max(pow(dotProduct, Shininess), 0) * length(input.Color);
-
+	float4 finalColor = float4(0, 0, 0, 0);
 	float4 textureColor = tex2D(textureSampler, input.TextureCoordinate);
-	textureColor.a = 1;
-    // TODO: add your pixel shader code here.
+
+	float3 lightDirection = DiffusePosition - input.WorldPosition;
+	float attenuation = saturate(1.0f - length(lightDirection) / DiffuseLightRadius);
+	float3 light = normalize(lightDirection);
+	float dotProduct = dot(DiffuseLightDirection, -light);
+
+	if(dotProduct > DiffuseLightAngleCosine)
+	{
+		float spotIntensity = pow(dotProduct, DiffuseLightDecayExponent);
+		float3 normal = normalize(input.Normal);
+		float3 viewDir = normalize(mul(normalize(ViewVector), World));
+		float diff = saturate(dot(normal, light));
+		float3 reflect = normalize(2 * diff * normal - light);
+		float specular = max(pow(dotProduct, Shininess), 0) * length(input.Color);
+		finalColor = AmbientColor * AmbientIntensity + 
+		spotIntensity
+		// * attenuation 
+		* DiffuseColor
+		//* DiffuseIntensity 
+		* textureColor * diff + SpecularIntensity * SpecularColor * specular;
+	}
 
 	if(FogEnabled)
-		return lerp(saturate(textureColor * (input.Color) + AmbientColor * AmbientIntensity + specular), FogColor, lerp(FOG_MIN, FOG_MAX, input.ViewSpaceZ));
+		return lerp(finalColor, FogColor, lerp(FOG_MIN, FOG_MAX, input.ViewSpaceZ));
 	else
-		return saturate(textureColor * (input.Color) + AmbientColor * AmbientIntensity + specular);
+		return finalColor;
     //return saturate(textureColor * (input.Color) + AmbientColor * AmbientIntensity + specular);
 }
 

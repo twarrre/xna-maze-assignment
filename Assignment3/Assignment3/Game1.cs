@@ -46,7 +46,7 @@ namespace Assignment3
         int[,] mazeLayout;
         BoundingSphere camBox;
         Boolean collided;
-        
+
         FirstPersonCamera camera;
         Vector3 startingPosition;
         Vector3 prevCamPosition;
@@ -55,6 +55,7 @@ namespace Assignment3
 
         Boolean collisionOn;
         Boolean fogOn;
+        Boolean day;
 
         private KeyboardState currentKeyboardState;
         private KeyboardState previousKeyboardState;
@@ -86,6 +87,7 @@ namespace Assignment3
             collided = false;
             collisionOn = true;
             fogOn = false;
+            day = true;
 
             // TODO: Add your initialization logic here
 
@@ -139,11 +141,16 @@ namespace Assignment3
             effect.View = camera.ViewMatrix;
             effect.LightingEnabled = true;
 
-            customeffect.Parameters["AmbientColor"].SetValue(Color.Orange.ToVector4());
-            customeffect.Parameters["AmbientIntensity"].SetValue(0.2f);
-            customeffect.Parameters["FogColor"].SetValue(Color.Orange.ToVector4());
+            //customeffect.Parameters["AmbientColor"].SetValue(Color.Orange.ToVector4());
+            //customeffect.Parameters["AmbientIntensity"].SetValue(0.2f);
+            customeffect.Parameters["FogColor"].SetValue(Color.White.ToVector4());
             camera.setClippingFar(1000.0f);
             customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
+            customeffect.Parameters["DiffuseLightRadius"].SetValue(0.8f);
+            customeffect.Parameters["DiffuseLightAngleCosine"].SetValue(0.6f);
+            customeffect.Parameters["DiffuseLightDecayExponent"].SetValue(20);
+            customeffect.Parameters["DiffuseIntensity"].SetValue(6.0f);
+
 
             BuildMaze(wall, wallDiffuse, mazeLayout);
 
@@ -172,6 +179,9 @@ namespace Assignment3
             previousKeyboardState = currentKeyboardState;
             currentKeyboardState = Keyboard.GetState();
 
+            customeffect.Parameters["DiffuseLightDirection"].SetValue(camera.ViewDirection);
+            customeffect.Parameters["DiffusePosition"].SetValue(camera.Position);
+
             collided = false;
 
             // Allows the game to exit
@@ -184,9 +194,6 @@ namespace Assignment3
             {
                 camera.Position = startingPosition;
                 camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
-                fogOn = false;
-                collisionOn = true;
-                camera.resetZoom();
             }
 
             if (((previousGamePadState.Buttons.Y == ButtonState.Released) && (currentGamePadState.Buttons.Y == ButtonState.Pressed))
@@ -201,9 +208,26 @@ namespace Assignment3
                 fogOn = !fogOn;
             }
 
+            if (/*((previousGamePadState.Buttons.X == ButtonState.Released) && (currentGamePadState.Buttons.X == ButtonState.Pressed))
+                ||*/ ((currentKeyboardState.IsKeyDown(Keys.D) && previousKeyboardState.IsKeyUp(Keys.D))))
+            {
+                day = !day;
+            }
+
+            if (day)
+            {
+                customeffect.Parameters["AmbientColor"].SetValue(Color.White.ToVector4());
+                customeffect.Parameters["AmbientIntensity"].SetValue(0.2f);
+            }
+            else
+            {
+                customeffect.Parameters["AmbientColor"].SetValue(Color.Black.ToVector4());
+                customeffect.Parameters["AmbientIntensity"].SetValue(1.0f);
+            }
+
             if (fogOn)
             {
-                camera.setClippingFar(300.0f);
+                camera.setClippingFar(/*300.0f*/ MAZE_X * WALL_WIDTH);
                 customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
             }
             else
@@ -237,7 +261,14 @@ namespace Assignment3
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Orange);
+            if (day)
+            {
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+            }
+            else
+            {
+                GraphicsDevice.Clear(Color.Black);
+            }
 
             DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, home, homeDiffuse, mazeLayout);
 
@@ -261,7 +292,7 @@ namespace Assignment3
         private void DrawMaze(Model w, Texture2D wt, Model f, Texture2D ft, Model c, Texture2D ct, Model h, Texture2D ht, int[,] maze)
         {
             DrawModel(f, ft, new Vector3(0, 0, 0));
-            //DrawModel(c, ct, new Vector3(0, 0, 0));
+            DrawModel(c, ct, new Vector3(0, 0, 0));
             DrawModel(h, ht, startingPosition - new Vector3(0, 49, 0));
             for (int x = 0; x < MAZE_X; x++)
             {
@@ -283,7 +314,7 @@ namespace Assignment3
             foreach (ModelMesh mesh in m.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)
-                {                    
+                {
                     part.Effect = customeffect;
                     customeffect.Parameters["World"].SetValue(gameWorldRotation * transforms[mesh.ParentBone.Index] * Matrix.CreateTranslation(pos));
                     customeffect.Parameters["View"].SetValue(camera.ViewMatrix);
