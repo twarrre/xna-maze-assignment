@@ -2,58 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline" xmlns:Framework="Microsoft.Xna.Framework" xmlns:Processors="Microsoft.Xna.Framework.Content.Pipeline.Processors">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>Model\ceiling.fbx</Source>
-      <Name>Model\ceiling</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\ceiling.xnb</Output>
-      <Time>2014-11-02T19:15:46.9757387-08:00</Time>
-      <Dependency>
-        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\ceiling_0.xml</Key>
-        <Value>2014-11-06T11:45:04.281996-08:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
-      <Source>Model\floor.fbx</Source>
-      <Name>Model\floor</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\floor.xnb</Output>
-      <Time>2014-11-02T19:15:46.9907479-08:00</Time>
-      <Dependency>
-        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\floor_0.xml</Key>
-        <Value>2014-11-06T11:45:04.3460387-08:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
-      <Source>Model\wall.fbx</Source>
-      <Name>Model\wall</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\wall.xnb</Output>
-      <Time>2014-11-02T19:15:46.9917498-08:00</Time>
-      <Dependency>
-        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\wall_0.xml</Key>
-        <Value>2014-11-06T11:45:04.3940703-08:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
-      <Source>Model\home.fbx</Source>
-      <Name>Model\home</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\home.xnb</Output>
-      <Time>2014-11-03T12:35:36.6384637-08:00</Time>
-      <Dependency>
-        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\home_0.xml</Key>
-        <Value>2014-11-06T11:45:04.4340983-08:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
       <Source>Model\chicken.fbx</Source>
       <Name>Model\chicken</Name>
       <Importer>FbxImporter</Importer>
@@ -63,9 +11,23 @@
       <Time>2014-11-04T18:31:16.5848185-08:00</Time>
       <Dependency>
         <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\chicken_0.xml</Key>
-        <Value>2014-11-06T11:45:04.5191546-08:00</Value>
+        <Value>2014-11-12T22:01:17.3844018-08:00</Value>
       </Dependency>
       <Request>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\chicken_diffuse_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>Model\chicken_animv2.fbx</Source>
+      <Name>Model\chicken_animv2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>SkinProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\chicken_animv2.xnb</Output>
+      <Time>2014-11-09T17:56:16.9124805-08:00</Time>
+      <Dependency>
+        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\chicken_animv2_0.xml</Key>
+        <Value>2014-11-12T22:01:19.9477108-08:00</Value>
+      </Dependency>
+      <Request>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\chicken_diffuse_1.xnb</Request>
     </Item>
     <Item>
       <Source>Texture\pavers1d2.jpg</Source>
@@ -74,7 +36,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\pavers1d2.xnb</Output>
-      <Time>2014-11-02T19:15:47.0157662-08:00</Time>
+      <Time>2014-11-02T19:15:47-08:00</Time>
     </Item>
     <Item>
       <Source>Texture\walltexture.dds</Source>
@@ -95,6 +57,24 @@
       <Time>2014-11-03T12:32:28.7375772-08:00</Time>
     </Item>
     <Item>
+      <Source>Texture\stone.jpg</Source>
+      <Name>Texture\stone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\stone.xnb</Output>
+      <Time>2014-11-06T13:51:56-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\chicken_diffuse.dds</Source>
+      <Name>Texture\chicken_diffuse</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\chicken_diffuse.xnb</Output>
+      <Time>2014-10-03T09:42:25.1967889-07:00</Time>
+    </Item>
+    <Item>
       <Source>Effects\Ambient.fx</Source>
       <Name>Effects\Ambient</Name>
       <Importer>EffectImporter</Importer>
@@ -102,6 +82,15 @@
       <Options>None</Options>
       <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Effects\Ambient.xnb</Output>
       <Time>2014-11-06T12:08:16.6084052-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Effects\AmbientAnim.fx</Source>
+      <Name>Effects\AmbientAnim</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Effects\AmbientAnim.xnb</Output>
+      <Time>2014-11-12T22:12:01.2450883-08:00</Time>
     </Item>
     <Item>
       <Source>Model\ceiling.fbx</Source>
@@ -152,16 +141,82 @@
       </Parameters>
       <Options>None</Options>
       <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\chicken_diffuse_0.xnb</Output>
-      <Time>2014-11-06T11:45:04.4831302-08:00</Time>
+      <Time>2014-11-12T22:01:17.3531506-08:00</Time>
     </Item>
     <Item>
-      <Source>Texture\stone.jpg</Source>
-      <Name>Texture\stone</Name>
+      <Source>Model\chicken_animv2.fbx</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\chicken_animv2_0.xml</Output>
+      <Time>2014-11-09T17:56:16.9124805-08:00</Time>
+    </Item>
+    <Item>
+      <Source>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\FBX\8C6C4E1B\chicken_animv2.fbm\chicken_diffuse.dds</Source>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Framework:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+        <Data Key="PremultiplyAlpha" Type="bool">true</Data>
+      </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\stone.xnb</Output>
-      <Time>2014-11-06T13:51:56.3683193-08:00</Time>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\chicken_diffuse_1.xnb</Output>
+      <Time>2014-11-12T22:01:19.5297459-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Model\ceiling.fbx</Source>
+      <Name>Model\ceiling</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\ceiling.xnb</Output>
+      <Time>2014-11-02T19:15:46.9757387-08:00</Time>
+      <Dependency>
+        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\ceiling_0.xml</Key>
+        <Value>2014-11-12T22:01:17.1656396-08:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Model\floor.fbx</Source>
+      <Name>Model\floor</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\floor.xnb</Output>
+      <Time>2014-11-02T19:15:46.9907479-08:00</Time>
+      <Dependency>
+        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\floor_0.xml</Key>
+        <Value>2014-11-12T22:01:17.2281437-08:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Model\wall.fbx</Source>
+      <Name>Model\wall</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\wall.xnb</Output>
+      <Time>2014-11-02T19:15:46.9917498-08:00</Time>
+      <Dependency>
+        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\wall_0.xml</Key>
+        <Value>2014-11-12T22:01:17.275019-08:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Model\home.fbx</Source>
+      <Name>Model\home</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Model\home.xnb</Output>
+      <Time>2014-11-03T12:35:36.6384637-08:00</Time>
+      <Dependency>
+        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\obj\x86\Debug\Model\home_0.xml</Key>
+        <Value>2014-11-12T22:01:17.3062719-08:00</Value>
+      </Dependency>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -176,6 +231,10 @@
       <OutputDirectory>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
+      <Assembly>
+        <Key>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinPipeline\bin\x86\Debug\SkinPipeline.dll</Key>
+        <Value>2014-11-12T21:38:02.9977215-08:00</Value>
+      </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
         <Value>2011-09-01T16:22:30-07:00</Value>

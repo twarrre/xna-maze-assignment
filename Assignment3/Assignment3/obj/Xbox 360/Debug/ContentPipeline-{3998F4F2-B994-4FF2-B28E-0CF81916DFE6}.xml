@@ -101,7 +101,7 @@
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Effects\Ambient.xnb</Output>
-      <Time>2014-11-06T09:14:48.374128-08:00</Time>
+      <Time>2014-11-06T12:08:16.6084052-08:00</Time>
     </Item>
     <Item>
       <Source>Model\ceiling.fbx</Source>
@@ -153,6 +153,15 @@
       <Options>None</Options>
       <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\chicken_diffuse_0.xnb</Output>
       <Time>2014-11-06T10:02:59.0189677-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Texture\stone.jpg</Source>
+      <Name>Texture\stone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Texture\stone.xnb</Output>
+      <Time>2014-11-06T13:51:56.3683193-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

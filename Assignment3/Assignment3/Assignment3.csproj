@@ -87,6 +87,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SkinnedModel\SkinnedModel.csproj">
+      <Project>{7871AF83-1443-49C4-81A6-4041657E7C65}</Project>
+      <Name>SkinnedModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SkinPipeline\SkinPipeline.csproj">
+      <Project>{E0BC0B12-42ED-484E-83D3-1BEFDF1EF922}</Project>
+      <Name>SkinPipeline</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Assignment3Content\Assignment3Content.contentproj">
       <Name>Assignment3Content</Name>
       <XnaReferenceType>Content</XnaReferenceType>

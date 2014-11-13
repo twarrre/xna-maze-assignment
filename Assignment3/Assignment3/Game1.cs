@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using SkinnedModel;
 
 namespace Assignment3
 {
@@ -21,6 +22,7 @@ namespace Assignment3
 
         BasicEffect effect;
         Effect customeffect;
+        Effect customEffectAnimation;
 
         Model floor;
         Model ceiling;
@@ -59,6 +61,10 @@ namespace Assignment3
         private KeyboardState previousKeyboardState;
         private GamePadState previousGamePadState;
         private GamePadState currentGamePadState;
+
+        Model chickenModel;
+        Texture2D chickenDiffuse;
+        AnimationPlayer chickenAnimationPlayer;
 
         public Game1()
         {
@@ -110,15 +116,18 @@ namespace Assignment3
             effect = new BasicEffect(graphics.GraphicsDevice);
 
             customeffect = Content.Load<Effect>(@"Effects\Ambient");
+            customEffectAnimation = Content.Load<Effect>(@"Effects\AmbientAnim");
             ceiling = Content.Load<Model>(@"Model\ceiling");
             floor = Content.Load<Model>(@"Model\floor");
             wall = Content.Load<Model>(@"Model\wall");
             home = Content.Load<Model>(@"Model\home");
+            chickenModel = Content.Load<Model>(@"Model\chicken_animv2");
 
             wallDiffuse = Content.Load<Texture2D>(@"Texture\walltexture");
             ceilingDiffuse = Content.Load<Texture2D>(@"Texture\stone");
             floorDiffuse = Content.Load<Texture2D>(@"Texture\pavers1d2");
             homeDiffuse = Content.Load<Texture2D>(@"Texture\home");
+            chickenDiffuse = Content.Load<Texture2D>(@"Texture\chicken_diffuse");
 
             effect.AmbientLightColor = new Vector3(1f, 1f, 1f);
             effect.DiffuseColor = new Vector3(0.1f, 0.1f, 0.1f);
@@ -135,11 +144,27 @@ namespace Assignment3
             customeffect.Parameters["DiffuseIntensity"].SetValue(1.0f);
             customeffect.Parameters["DaylightIntensity"].SetValue(1.5f);
 
+            customEffectAnimation.Parameters["FogColor"].SetValue(Color.White.ToVector4());
+            customEffectAnimation.Parameters["FarPlane"].SetValue(camera.getClippingFar());
+            customEffectAnimation.Parameters["DiffuseLightRadius"].SetValue(0.8f);
+            customEffectAnimation.Parameters["DiffuseLightAngleCosine"].SetValue(0.6f);
+            customEffectAnimation.Parameters["DiffuseLightDecayExponent"].SetValue(20);
+            customEffectAnimation.Parameters["DiffuseIntensity"].SetValue(1.0f);
+            customEffectAnimation.Parameters["DaylightIntensity"].SetValue(1.5f);
 
             BuildMaze(wall, wallDiffuse, mazeLayout);
 
             viewVector = Vector3.Transform(camera.ViewDirection - camera.Position, Matrix.CreateRotationY(0));
             viewVector.Normalize();
+
+            SkinningData skinningData = chickenModel.Tag as SkinningData;
+            if (skinningData == null)
+                throw new InvalidOperationException
+                    ("This model does not contain a SkinningData tag.");
+
+            chickenAnimationPlayer = new AnimationPlayer(skinningData);
+            AnimationClip clip = skinningData.AnimationClips["Take 001"];
+            chickenAnimationPlayer.StartClip(clip);
         }
 
         /// <summary>
@@ -165,6 +190,9 @@ namespace Assignment3
 
             customeffect.Parameters["DiffuseLightDirection"].SetValue(camera.ViewDirection);
             customeffect.Parameters["DiffusePosition"].SetValue(camera.Position);
+
+            customEffectAnimation.Parameters["DiffuseLightDirection"].SetValue(camera.ViewDirection);
+            customEffectAnimation.Parameters["DiffusePosition"].SetValue(camera.Position);
 
             collided = false;
 
@@ -204,22 +232,28 @@ namespace Assignment3
             {
                 customeffect.Parameters["DayEnabled"].SetValue(true);
                 customeffect.Parameters["DiffuseLightDecayExponent"].SetValue(0.5f);
+                customEffectAnimation.Parameters["DayEnabled"].SetValue(true);
+                customEffectAnimation.Parameters["DiffuseLightDecayExponent"].SetValue(0.5f);
             }
             else
             {
                 customeffect.Parameters["DayEnabled"].SetValue(false);
                 customeffect.Parameters["DiffuseLightDecayExponent"].SetValue(20);
+                customEffectAnimation.Parameters["DayEnabled"].SetValue(false);
+                customEffectAnimation.Parameters["DiffuseLightDecayExponent"].SetValue(20);
             }
 
             if (fogOn)
             {
                 camera.setClippingFar(300.0f /*MAZE_X * WALL_WIDTH*/);
                 customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
+                customEffectAnimation.Parameters["FarPlane"].SetValue(camera.getClippingFar());
             }
             else
             {
                 camera.setClippingFar(1000.0f);
                 customeffect.Parameters["FarPlane"].SetValue(camera.getClippingFar());
+                customEffectAnimation.Parameters["FarPlane"].SetValue(camera.getClippingFar());
             }
 
             if (collisionOn)
@@ -238,6 +272,8 @@ namespace Assignment3
                 prevCamPosition = camera.Position;
             }
 
+            chickenAnimationPlayer.Update(gameTime.ElapsedGameTime, true, Matrix.CreateTranslation(startingPosition.X, startingPosition.Y - 50, startingPosition.Z));
+
             base.Update(gameTime);
         }
 
@@ -249,6 +285,8 @@ namespace Assignment3
         {
 
             GraphicsDevice.Clear(Color.White);
+
+            DrawChicken(chickenModel, chickenDiffuse, new Vector3(startingPosition.X, startingPosition.Y - 50, startingPosition.Z));
      
             DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, home, homeDiffuse, mazeLayout);
 
@@ -306,6 +344,32 @@ namespace Assignment3
                     customeffect.Parameters["FogEnabled"].SetValue(fogOn);
                 }
                 mesh.Draw();
+            }
+        }
+
+        private void DrawChicken(Model m, Texture2D t, Vector3 pos)
+        {
+            Matrix[] groundMatrix = new Matrix[chickenModel.Bones.Count];
+            chickenModel.CopyAbsoluteBoneTransformsTo(groundMatrix);
+
+            Matrix[] bones = chickenAnimationPlayer.GetSkinTransforms();
+
+            foreach (ModelMesh mm in chickenModel.Meshes)
+            {
+                foreach (ModelMeshPart mmp in mm.MeshParts)
+                {
+                    mmp.Effect = customEffectAnimation;
+                    customEffectAnimation.Parameters["World"].SetValue(groundMatrix[mm.ParentBone.Index] * Matrix.Identity * Matrix.CreateTranslation(pos));
+                    customEffectAnimation.Parameters["View"].SetValue(camera.ViewMatrix);
+                    customEffectAnimation.Parameters["Projection"].SetValue(camera.ProjectionMatrix);
+                    Matrix worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(groundMatrix[mm.ParentBone.Index] * Matrix.Identity * Matrix.CreateTranslation(pos)));
+                    customEffectAnimation.Parameters["WorldInverseTranspose"].SetValue(worldInverseTransposeMatrix);
+                    customEffectAnimation.Parameters["ViewVector"].SetValue(viewVector);
+                    customEffectAnimation.Parameters["ModelTexture"].SetValue(t);
+                    customEffectAnimation.Parameters["FogEnabled"].SetValue(fogOn);
+                    customEffectAnimation.Parameters["Bones"].SetValue(bones);
+                }
+                mm.Draw();
             }
         }
 
