@@ -218,6 +218,35 @@
         <Value>2014-11-12T22:01:17.3062719-08:00</Value>
       </Dependency>
     </Item>
+    <Item>
+      <Source>Audio\bounce.wav</Source>
+      <Name>Audio\bounce</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\bounce.xnb</Output>
+      <Time>2014-11-14T23:05:58.5246604-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\day.mp3</Source>
+      <Name>Audio\day</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\day.xnb</Output>
+      <Extra>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\day.wma</Extra>
+      <Time>2014-11-14T22:48:49.9250481-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\night.mp3</Source>
+      <Name>Audio\night</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\night.xnb</Output>
+      <Extra>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\night.wma</Extra>
+      <Time>2014-11-14T16:57:24.0017326-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3998F4F2-B994-4FF2-B28E-0CF81916DFE6}</ContentProjectGUID>

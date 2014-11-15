@@ -66,6 +66,11 @@ namespace Assignment3
         Texture2D chickenDiffuse;
         AnimationPlayer chickenAnimationPlayer;
 
+        SoundEffectInstance bounce;
+        Song daySong;
+        Song nightSong;
+        Song currentSong;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -129,6 +134,10 @@ namespace Assignment3
             homeDiffuse = Content.Load<Texture2D>(@"Texture\home");
             chickenDiffuse = Content.Load<Texture2D>(@"Texture\chicken_diffuse");
 
+            bounce = Content.Load<SoundEffect>(@"Audio\bounce").CreateInstance();
+            daySong = Content.Load<Song>(@"Audio\day");
+            nightSong = Content.Load<Song>(@"Audio\night");
+
             effect.AmbientLightColor = new Vector3(1f, 1f, 1f);
             effect.DiffuseColor = new Vector3(0.1f, 0.1f, 0.1f);
             effect.Projection = camera.ProjectionMatrix;
@@ -165,6 +174,9 @@ namespace Assignment3
             chickenAnimationPlayer = new AnimationPlayer(skinningData);
             AnimationClip clip = skinningData.AnimationClips["Take 001"];
             chickenAnimationPlayer.StartClip(clip);
+
+            MediaPlayer.Play(daySong);
+            currentSong = daySong;
         }
 
         /// <summary>
@@ -220,12 +232,55 @@ namespace Assignment3
                 || ((currentKeyboardState.IsKeyDown(Keys.F) && previousKeyboardState.IsKeyUp(Keys.F))))
             {
                 fogOn = !fogOn;
+
+                if (fogOn)
+                    MediaPlayer.Volume = 0.5f;
+                else
+                    MediaPlayer.Volume = 1.0f;
             }
 
             if (((previousGamePadState.Buttons.RightShoulder == ButtonState.Released) && (currentGamePadState.Buttons.RightShoulder == ButtonState.Pressed))
                 || ((currentKeyboardState.IsKeyDown(Keys.D) && previousKeyboardState.IsKeyUp(Keys.D))))
             {
                 day = !day;
+
+                if (day)
+                {
+                    bool pause = false; ;
+                    if (MediaPlayer.State == MediaState.Paused)
+                        pause = true;
+
+                    MediaPlayer.Play(daySong);
+                    currentSong = daySong;
+                    
+                    if(pause)
+                        MediaPlayer.Pause();
+                }
+                else
+                {
+                    bool pause = false; ;
+                    if (MediaPlayer.State == MediaState.Paused)
+                        pause = true;
+
+                    MediaPlayer.Play(nightSong);
+                    currentSong = nightSong;
+                   
+                    if (pause)
+                        MediaPlayer.Pause();
+                }
+            }
+
+            if (((previousGamePadState.Buttons.RightStick == ButtonState.Released) && (currentGamePadState.Buttons.RightStick == ButtonState.Pressed))
+                || ((currentKeyboardState.IsKeyDown(Keys.M) && previousKeyboardState.IsKeyUp(Keys.M))))
+            {
+                if (MediaPlayer.State == MediaState.Playing)
+                {
+                    MediaPlayer.Pause();
+                }
+                else
+                {
+                    MediaPlayer.Resume();
+                }
             }
 
             if (day)
@@ -416,6 +471,9 @@ namespace Assignment3
         {
             if (cam.Intersects(wall))
             {
+                if (bounce.State != SoundState.Playing)
+                    bounce.Play();
+
                 collided = true;
                 Vector3 pos = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * x), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * z));
                 int camX = (int)Math.Round(Math.Abs(-((camera.Position.X - maze_min_x + WALL_MIN_X) / WALL_WIDTH)));
