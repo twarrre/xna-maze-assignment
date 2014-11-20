@@ -49,6 +49,7 @@ namespace Assignment3
 
         FirstPersonCamera camera;
         Vector3 startingPosition;
+        Vector3 chickenPosition;
         Vector3 prevCamPosition;
 
         Vector3 viewVector;
@@ -67,6 +68,7 @@ namespace Assignment3
         AnimationPlayer chickenAnimationPlayer;
 
         SoundEffectInstance bounce;
+        SoundEffectInstance walk;
         Song daySong;
         Song nightSong;
         Song currentSong;
@@ -100,6 +102,7 @@ namespace Assignment3
 
             mazeBoxes = new BoundingBox[MAZE_X, MAZE_Y];
             startingPosition = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * 1), 50, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (MAZE_Y - 2)));
+            chickenPosition = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * m.FurthestPoint.X), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * m.FurthestPoint.Y));
             camera.Position = startingPosition;
             camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
             camBox = new BoundingSphere(camera.Position, 4);
@@ -135,6 +138,8 @@ namespace Assignment3
             chickenDiffuse = Content.Load<Texture2D>(@"Texture\chicken_diffuse");
 
             bounce = Content.Load<SoundEffect>(@"Audio\bounce").CreateInstance();
+            walk = Content.Load<SoundEffect>(@"Audio\walk").CreateInstance();
+            camera.Walk = walk;
             daySong = Content.Load<Song>(@"Audio\day");
             nightSong = Content.Load<Song>(@"Audio\night");
 
@@ -327,7 +332,7 @@ namespace Assignment3
                 prevCamPosition = camera.Position;
             }
 
-            chickenAnimationPlayer.Update(gameTime.ElapsedGameTime, true, Matrix.CreateTranslation(startingPosition.X, startingPosition.Y - 50, startingPosition.Z));
+            chickenAnimationPlayer.Update(gameTime.ElapsedGameTime, true, Matrix.CreateTranslation(chickenPosition));
 
             base.Update(gameTime);
         }
@@ -341,7 +346,7 @@ namespace Assignment3
 
             GraphicsDevice.Clear(Color.White);
 
-            DrawChicken(chickenModel, chickenDiffuse, new Vector3(startingPosition.X, startingPosition.Y - 50, startingPosition.Z));
+            DrawChicken(chickenModel, chickenDiffuse, chickenPosition);
      
             DrawMaze(wall, wallDiffuse, floor, floorDiffuse, ceiling, ceilingDiffuse, home, homeDiffuse, mazeLayout);
 

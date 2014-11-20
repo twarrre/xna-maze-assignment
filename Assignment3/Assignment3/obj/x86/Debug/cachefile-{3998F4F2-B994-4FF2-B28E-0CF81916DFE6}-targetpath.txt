@@ -18,3 +18,4 @@ Content\Audio\day.xnb
 Content\Audio\day.wma
 Content\Audio\night.xnb
 Content\Audio\night.wma
+Content\Audio\walk.xnb

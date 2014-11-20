@@ -40,6 +40,9 @@ namespace Assignment3
         /// </summary>
         static Random rnd = new Random();
 
+		private int _longestPathSoFar;
+        public Point FurthestPoint { get; private set; }
+
         private int _width, _height;
         private Point _currentTile;
 
@@ -179,6 +182,8 @@ namespace Assignment3
                 //excavate the square we are on
                 Maze[CurrentTile.X, CurrentTile.Y] = 0;
 
+
+
                 //get all valid neighbors for the new tile  
                 neighbors = GetValidNeighbors(CurrentTile);
 
@@ -192,6 +197,9 @@ namespace Assignment3
                 }
                 else
                 {
+
+
+					UpdateFurthestPoint();
                     //toss this tile out 
                     //(thereby returning to a previous tile in the list to check).
                     CurrentTile = _tiletoTry.Pop();
@@ -199,6 +207,15 @@ namespace Assignment3
             }
 
             return Maze;
+        }
+
+		 private void UpdateFurthestPoint()
+        {
+            if (_tiletoTry.Count > _longestPathSoFar)
+            {
+                _longestPathSoFar = _tiletoTry.Count;
+                FurthestPoint = CurrentTile;
+            }
         }
 
         #endregion
@@ -282,6 +299,8 @@ namespace Assignment3
         public int[,] ToIntMap()
         {
             int[,] intMaze = new int[Width, Height];
+
+
             for (int y = Height - 1; y >= 0; y--)
             {
                 for (int x = 0; x < Width; x++)
@@ -294,9 +313,11 @@ namespace Assignment3
                     {
                         intMaze[x, y] = 1;
                     }
+
                 }
+
             }
             return intMaze;
         }
     }
-}
+}   

@@ -247,6 +247,15 @@
       <Extra>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\night.wma</Extra>
       <Time>2014-11-14T16:57:24.0017326-08:00</Time>
     </Item>
+    <Item>
+      <Source>Audio\walk.wav</Source>
+      <Name>Audio\walk</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\walk.xnb</Output>
+      <Time>2014-11-15T11:25:26.4380658-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3998F4F2-B994-4FF2-B28E-0CF81916DFE6}</ContentProjectGUID>

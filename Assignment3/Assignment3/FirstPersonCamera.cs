@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Assignment3
 {
@@ -84,6 +85,8 @@ namespace Assignment3
 
         private float slideElapsedSeconds;
         private bool isSliding;
+
+        private SoundEffectInstance walk;
 
         public FirstPersonCamera(Game game) : base(game)
         {
@@ -263,6 +266,20 @@ namespace Assignment3
 
             direction.Z += i.GetForward() + i.GetBackward();
             direction.X += i.GetRight() + i.GetLeft();
+
+            if ((direction.X != 0 || direction.Z != 0))
+            {
+                if (walk.State == SoundState.Paused)
+                    walk.Resume();
+                else if (walk.State != SoundState.Playing)
+                    walk.Play();
+            }
+            else
+            {
+                if (walk.State == SoundState.Playing)
+                    walk.Pause();
+
+            }
 
             if (isSliding)
             {
@@ -768,6 +785,12 @@ namespace Assignment3
         public Vector3 ZAxis
         {
             get { return zAxis; }
+        }
+
+        public SoundEffectInstance Walk
+        {
+            get { return walk; }
+            set { walk = value; }
         }
 
     #endregion
