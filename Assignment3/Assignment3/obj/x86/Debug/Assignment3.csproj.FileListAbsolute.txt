@@ -70,3 +70,16 @@ C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - In
 C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\day.wma
 C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\night.wma
 C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\walk.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Model\chicken_animv2.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\stone.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Texture\chicken_diffuse.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Effects\AmbientAnim.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\bounce.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\walk.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\day.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\night.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\chicken_diffuse_1.xnb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\day.wma
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\Content\Audio\night.wma
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\SkinnedModel.dll
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3\bin\x86\Debug\SkinnedModel.pdb

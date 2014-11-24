@@ -4,3 +4,9 @@ C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - In
 C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\obj\x86\Debug\SkinnedModel.dll
 C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\obj\x86\Debug\SkinnedModel.pdb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\SkinnedModel\bin\x86\Debug\SkinnedModel.dll
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\SkinnedModel\bin\x86\Debug\SkinnedModel.pdb
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\SkinnedModel\obj\x86\Debug\SkinnedModel.csprojResolveAssemblyReference.cache
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\SkinnedModel\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\SkinnedModel\obj\x86\Debug\SkinnedModel.dll
+C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\SkinnedModel\obj\x86\Debug\SkinnedModel.pdb

@@ -1,3 +1,7 @@
+Content\Model\ceiling.xnb
+Content\Model\floor.xnb
+Content\Model\wall.xnb
+Content\Model\home.xnb
 Content\Model\chicken.xnb
 Content\Model\chicken_animv2.xnb
 Content\Texture\pavers1d2.xnb
@@ -7,15 +11,11 @@ Content\Texture\stone.xnb
 Content\Texture\chicken_diffuse.xnb
 Content\Effects\Ambient.xnb
 Content\Effects\AmbientAnim.xnb
-Content\chicken_diffuse_0.xnb
-Content\chicken_diffuse_1.xnb
-Content\Model\ceiling.xnb
-Content\Model\floor.xnb
-Content\Model\wall.xnb
-Content\Model\home.xnb
 Content\Audio\bounce.xnb
+Content\Audio\walk.xnb
 Content\Audio\day.xnb
 Content\Audio\day.wma
 Content\Audio\night.xnb
 Content\Audio\night.wma
-Content\Audio\walk.xnb
+Content\chicken_diffuse_0.xnb
+Content\chicken_diffuse_1.xnb
