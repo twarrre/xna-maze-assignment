@@ -54,6 +54,7 @@ namespace Assignment3
         Vector3 chickenPosition;
         Vector3 prevCamPosition;
         Vector3 heading;
+        Vector3 prevHeading;
 
         Vector3 viewVector;
 
@@ -109,19 +110,21 @@ namespace Assignment3
                                     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                                     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+
             collided = false;
             chickCollided = false;
             collisionOn = true;
             fogOn = false;
             day = true;
             heading = new Vector3(0, 0, 1);
+            prevHeading = heading;
             mazeBoxes = new BoundingBox[MAZE_X, MAZE_Y];
             startingPosition = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * 1), 50, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (MAZE_Y - 2)));
             chickenPosition = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * m.FurthestPoint.X), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * m.FurthestPoint.Y));
             camera.Position = startingPosition;
             camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
             camBox = new BoundingSphere(camera.Position, 4);
-            chickenSphere = new BoundingSphere(chickenPosition, 4);
+            chickenSphere = new BoundingSphere(chickenPosition, 50);
 
             currentKeyboardState = Keyboard.GetState();
             currentGamePadState = GamePad.GetState(PlayerIndex.One);
@@ -358,7 +361,6 @@ namespace Assignment3
             //{
             //    heading = WallCheck(chickenPosition);
             //}
-
             for (int i = 0; i < MAZE_X; i++)
             {
                 for (int j = 0; j < MAZE_Y; j++)
@@ -367,12 +369,19 @@ namespace Assignment3
                 }
             }
             
+            if(heading == Vector3.Zero)
+                chickenPosition += Vector3.Cross(prevHeading, Vector3.Up);
+
             chickenPosition += heading;
             if (chickCollided)
             {
+                if (heading != Vector3.Zero)
+                    prevHeading = heading;
+
                 heading = new Vector3();
                 chickCollided = false;
             }
+
             Console.WriteLine("X: " + chickenPosition.X + ", Z: " + chickenPosition.Z);
             base.Update(gameTime);
         }
@@ -568,23 +577,22 @@ namespace Assignment3
                 {
                     if (chickZ > z)
                     {
-                        dir += new Vector3(0, 0, -1);
+                        dir += new Vector3(2, 0, 0);//1x
                     }
                     else if (chickZ < z)
                     {
-                        dir += new Vector3(0, 0, 1);
+                        dir += new Vector3(-2, 0, 0);//-1x
                     }
                 }
-
-                if (z == chickZ)
+                else if (z == chickZ)
                 {
                     if (chickX < x)
                     {
-                        dir += new Vector3(1, 0, 0);
+                        dir += new Vector3(0, 0, -2);//-1z
                     }
                     else if (chickX > x)
                     {
-                        dir += new Vector3(-1, 0, 0);
+                        dir += new Vector3(0, 0, 2);//1z
                     }
                 }
             }
