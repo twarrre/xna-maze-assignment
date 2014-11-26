@@ -69,6 +69,7 @@ namespace Assignment3
         Boolean collisionOn;
         Boolean fogOn;
         Boolean day;
+        float chickenRot;
 
         private KeyboardState currentKeyboardState;
         private KeyboardState previousKeyboardState;
@@ -137,6 +138,7 @@ namespace Assignment3
             chickenSphere = new BoundingSphere(chickenPosition, 50);
             extraMoveTime = new TimeSpan(0, 0, 1);
             distBetween = new Vector3();
+            chickenRot = 0.0f;
 
             currentKeyboardState = Keyboard.GetState();
             currentGamePadState = GamePad.GetState(PlayerIndex.One);
@@ -447,21 +449,27 @@ namespace Assignment3
             {
                 chickenPosition.X -= 1;
                 distBetween.X -= 1;
+                chickenRot = (float)(3 * Math.PI / 2);
             }
             if (distBetween.X < 0)
             {
                 chickenPosition.X += 1;
                 distBetween.X += 1;
+                chickenRot = (float)(Math.PI / 2);
             }
             if (distBetween.Z < 0)
             {
                 chickenPosition.Z += 1;
                 distBetween.Z += 1;
+
+                chickenRot = (float)(Math.PI);
             }
             if (distBetween.Z > 0)
             {
                 chickenPosition.Z -= 1;
                 distBetween.Z -= 1;
+
+                chickenRot = 0.0f;
             }
 
             //if (directionNorth == prevDirectionNorth)
@@ -560,7 +568,7 @@ namespace Assignment3
                 foreach (ModelMeshPart mmp in mm.MeshParts)
                 {
                     mmp.Effect = customEffectAnimation;
-                    customEffectAnimation.Parameters["World"].SetValue(groundMatrix[mm.ParentBone.Index] * Matrix.Identity * Matrix.CreateTranslation(pos));
+                    customEffectAnimation.Parameters["World"].SetValue(groundMatrix[mm.ParentBone.Index] * Matrix.Identity * Matrix.CreateTranslation(pos) * Matrix.CreateRotationY(chickenRot));
                     customEffectAnimation.Parameters["View"].SetValue(camera.ViewMatrix);
                     customEffectAnimation.Parameters["Projection"].SetValue(camera.ProjectionMatrix);
                     Matrix worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(groundMatrix[mm.ParentBone.Index] * Matrix.Identity * Matrix.CreateTranslation(pos)));
