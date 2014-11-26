@@ -100,16 +100,16 @@ namespace Assignment3
             m.CreateMaze();
             mazeLayout = m.ToIntMap();
 
-            mazeLayout = new int[,]{{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                                    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+            //mazeLayout = new int[,]{{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            //                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            //                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            //                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            //                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            //                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            //                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            //                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            //                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            //                        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
             collided = false;
             chickCollided = false;
@@ -201,6 +201,9 @@ namespace Assignment3
 
             MediaPlayer.Play(daySong);
             currentSong = daySong;
+
+            chickenPosition = camera.Position;
+            chickenPosition.Y = 0;
         }
 
         /// <summary>
@@ -368,21 +371,41 @@ namespace Assignment3
                     heading += CollisionChickenCheck(chickenSphere, mazeBoxes[i, j], i, j); 
                 }
             }
-            
-            if(heading == Vector3.Zero)
-                chickenPosition += Vector3.Cross(prevHeading, Vector3.Up);
 
-            chickenPosition += heading;
-            if (chickCollided)
+            if (heading == Vector3.Zero)
             {
-                if (heading != Vector3.Zero)
-                    prevHeading = heading;
-
-                heading = new Vector3();
-                chickCollided = false;
+                //chickenPosition += Vector3.Cross(prevHeading, Vector3.Up);
+                if (prevHeading == new Vector3(1, 0, 0))
+                {
+                    heading = new Vector3(0, 0, 1);
+                }
+                else if (prevHeading == new Vector3(-1, 0, 0))
+                {
+                    heading = new Vector3(0, 0, -1);
+                }
+                else if (prevHeading == new Vector3(0, 0, 1))
+                {
+                    heading = new Vector3(-1, 0, 0);
+                }
+                else if (prevHeading == new Vector3(0, 0, -1))
+                {
+                    heading = new Vector3(1, 0, 0);
+                }
             }
 
-            Console.WriteLine("X: " + chickenPosition.X + ", Z: " + chickenPosition.Z);
+            chickenPosition += heading;
+            //if (chickCollided)
+            //{
+            //    if (heading != Vector3.Zero)
+            //        prevHeading = heading;
+
+            //    heading = new Vector3();
+            //    chickCollided = false;
+            //}
+            prevHeading = heading;
+            heading = new Vector3();
+
+            Console.WriteLine("X: " + chickenPosition.X + ", Y: " + chickenPosition.Y + ", Z: " + chickenPosition.Z);
             base.Update(gameTime);
         }
 
@@ -566,35 +589,59 @@ namespace Assignment3
         private Vector3 CollisionChickenCheck(BoundingSphere chick, BoundingBox wall, int x, int z)
         {
             Vector3 dir = new Vector3(0, 0, 0);
+            Vector3 pos = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * x), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * z));
+            int chickX = (int)Math.Round(Math.Abs(-((chickenPosition.X - maze_min_x + WALL_MIN_X) / WALL_WIDTH)));
+            int chickZ = (int)Math.Round(Math.Abs((chickenPosition.Z - maze_max_z + WALL_MAX_Z) / WALL_WIDTH));
+
             if (chick.Intersects(wall))
             {
                 chickCollided = true;
-                Vector3 pos = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * x), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * z));
-                int chickX = (int)Math.Round(Math.Abs(-((chickenPosition.X - maze_min_x + WALL_MIN_X) / WALL_WIDTH)));
-                int chickZ = (int)Math.Round(Math.Abs((chickenPosition.Z - maze_max_z + WALL_MAX_Z) / WALL_WIDTH));
+
 
                 if (x == chickX)
                 {
                     if (chickZ > z)
                     {
-                        dir += new Vector3(2, 0, 0);//1x
+                        dir += new Vector3(1, 0, 0);//1x
                     }
                     else if (chickZ < z)
                     {
-                        dir += new Vector3(-2, 0, 0);//-1x
+                        dir += new Vector3(-1, 0, 0);//-1x
                     }
                 }
                 else if (z == chickZ)
                 {
                     if (chickX < x)
                     {
-                        dir += new Vector3(0, 0, -2);//-1z
+                        dir += new Vector3(0, 0, -1);//-1z
                     }
                     else if (chickX > x)
                     {
-                        dir += new Vector3(0, 0, 2);//1z
+                        dir += new Vector3(0, 0, 1);//1z
                     }
                 }
+            }
+            else
+            {
+                //if ((0 < chickX) && (chickX < MAZE_X - 1) && (0 < chickZ) && (chickZ < MAZE_Y - 1))
+                //{
+                //    if (mazeLayout[chickX, chickZ + 1] == 0)
+                //    {
+                //        dir += new Vector3(0, 0, 2);
+                //    }
+                //    else if (mazeLayout[chickX + 1, chickZ] == 0)
+                //    {
+                //        dir += new Vector3(-2, 0, 0);
+                //    }
+                //    else if (mazeLayout[chickX, chickZ - 1] == 0)
+                //    {
+                //        dir += new Vector3(0, 0, -2);
+                //    }
+                //    else if (mazeLayout[chickX - 1, chickZ] == 0)
+                //    {
+                //        dir += new Vector3(2, 0, 0);
+                //    }
+                //}
             }
             return dir;
         }
