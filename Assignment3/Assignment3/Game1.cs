@@ -40,6 +40,11 @@ namespace Assignment3
         const int MAZE_Y = 10;
         int maze_min_x;
         int maze_max_z;
+        int prevCycleDir;
+        int openPaths;
+        Vector3 distBetween;
+        Boolean directionNorth;
+        Boolean prevDirectionNorth;
         const int WALL_MIN_X = -40;
         const int WALL_MAX_Z = 40;
         const int WALL_WIDTH = 80;
@@ -56,7 +61,9 @@ namespace Assignment3
         Vector3 prevCamPosition;
         Vector3 heading;
         Vector3 prevHeading;
-
+        Vector3 target;
+        Vector3 prevTarget;
+        Vector3 prevDistBetween;
         Vector3 viewVector;
 
         Boolean collisionOn;
@@ -118,6 +125,7 @@ namespace Assignment3
             collisionOn = true;
             fogOn = false;
             day = true;
+            openPaths = 0;
             heading = new Vector3(0, 0, 1);
             prevHeading = heading;
             mazeBoxes = new BoundingBox[MAZE_X, MAZE_Y];
@@ -128,6 +136,7 @@ namespace Assignment3
             camBox = new BoundingSphere(camera.Position, 4);
             chickenSphere = new BoundingSphere(chickenPosition, 50);
             extraMoveTime = new TimeSpan(0, 0, 1);
+            distBetween = new Vector3();
 
             currentKeyboardState = Keyboard.GetState();
             currentGamePadState = GamePad.GetState(PlayerIndex.One);
@@ -206,8 +215,10 @@ namespace Assignment3
             MediaPlayer.IsRepeating = true;
             currentSong = daySong;
 
+
             chickenPosition = camera.Position;
             chickenPosition.Y = 0;
+            target = chickenPosition;
         }
 
         /// <summary>
@@ -226,6 +237,11 @@ namespace Assignment3
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            int chickX = (int)Math.Round(Math.Abs(-((chickenPosition.X - maze_min_x + WALL_MIN_X) / WALL_WIDTH)));
+            int chickZ = (int)Math.Round(Math.Abs((chickenPosition.Z - maze_max_z + WALL_MAX_Z) / WALL_WIDTH));
+            int cycleDir = 0;
+            prevDistBetween = distBetween;
+
             previousGamePadState = currentGamePadState;
             currentGamePadState = GamePad.GetState(PlayerIndex.One);
             previousKeyboardState = currentKeyboardState;
@@ -370,65 +386,93 @@ namespace Assignment3
 
             chickenAnimationPlayer.Update(gameTime.ElapsedGameTime, true, Matrix.CreateTranslation(chickenPosition));
 
-            //Console.WriteLine("X: " + camera.Position.X + ", Z: " + camera.Position.Z);
-
-            //ChickenNavigate();
-            
-            //if (((chickenPosition.Z % (WALL_WIDTH/2)) == 0) && ((chickenPosition.X % (WALL_WIDTH/2)) == 0))
-            //{
-            //    heading = WallCheck(chickenPosition);
-            //}
-            for (int i = 0; i < MAZE_X; i++)
+            if (chickenPosition == target)
             {
-                for (int j = 0; j < MAZE_Y; j++)
+                Random rand = new Random();
+                cycleDir = rand.Next();
+                if ((cycleDir % 2 == 0) && (prevCycleDir % 2 == 0))
                 {
-                    heading += CollisionChickenCheck(chickenSphere, mazeBoxes[i, j], i, j); 
+                    if ((mazeLayout[chickX, chickZ + 1] == 0) && (chickZ + 1 < MAZE_Y))
+                    {
+                        openPaths++;
+                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ + 1)));
+                    }
+                    else if ((mazeLayout[chickX + 1, chickZ] == 0) && (chickX + 1 < MAZE_X))
+                    {
+                        openPaths++;
+                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX + 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+                    }
+                    else if ((mazeLayout[chickX - 1, chickZ] == 0) && (chickX - 1 > 0))
+                    {
+                        openPaths++;
+                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX - 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+                    }
+                    else if ((mazeLayout[chickX, chickZ - 1] == 0) && (chickZ - 1 > 0))
+                    {
+                        openPaths++;
+                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ - 1)));
+                    }
+                }
+                else
+                {
+                    if ((mazeLayout[chickX - 1, chickZ] == 0) && (chickX - 1 > 0))
+                    {
+                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX - 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+                    }
+                    else if ((mazeLayout[chickX, chickZ - 1] == 0) && (chickZ - 1 > 0))
+                    {
+                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ - 1)));
+                    }
+                    else if ((mazeLayout[chickX, chickZ + 1] == 0) && (chickZ + 1 < MAZE_Y))
+                    {
+                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ + 1)));
+                    }
+                    else if ((mazeLayout[chickX + 1, chickZ] == 0) && (chickX + 1 < MAZE_X))
+                    {
+                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX + 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+                    }
+                }
+                if (prevDistBetween == -(distBetween) && openPaths > 1)
+                {
+                    target = chickenPosition;
+                    distBetween.Y = 1;
+                }
+                else
+                {
+                    distBetween = new Vector3(chickenPosition.X - target.X, chickenPosition.Y - target.Y, chickenPosition.Z - target.Z);
                 }
             }
 
-            //if (heading == Vector3.Zero && extraMoveTime > TimeSpan.Zero)
-            //{
-            //    //chickenPosition += Vector3.Cross(prevHeading, Vector3.Up);
-            //    heading = prevHeading;
-            //    extraMoveTime -= gameTime.ElapsedGameTime;
-            //}
-            //else
-            //{
-            //    heading = Vector3.Zero;
-            //    extraMoveTime = new TimeSpan(0, 0, 1);
-            //}
-
-            if (heading == Vector3.Zero)
+            if (distBetween.X > 0)
             {
-                if (prevHeading == new Vector3(1, 0, 0))
-                {
-                    heading = new Vector3(0, 0, 1);
-                }
-                else if (prevHeading == new Vector3(-1, 0, 0))
-                {
-                    heading = new Vector3(0, 0, -1);
-                }
-                else if (prevHeading == new Vector3(0, 0, 1))
-                {
-                    heading = new Vector3(-1, 0, 0);
-                }
-                else if (prevHeading == new Vector3(0, 0, -1))
-                {
-                    heading = new Vector3(1, 0, 0);
-                }                
+                chickenPosition.X -= 1;
+                distBetween.X -= 1;
+            }
+            if (distBetween.X < 0)
+            {
+                chickenPosition.X += 1;
+                distBetween.X += 1;
+            }
+            if (distBetween.Z < 0)
+            {
+                chickenPosition.Z += 1;
+                distBetween.Z += 1;
+            }
+            if (distBetween.Z > 0)
+            {
+                chickenPosition.Z -= 1;
+                distBetween.Z -= 1;
             }
 
-            chickenPosition += heading;
-            //if (chickCollided)
+            //if (directionNorth == prevDirectionNorth)
             //{
-            //    if (heading != Vector3.Zero)
-            //        prevHeading = heading;
-
-            //    heading = new Vector3();
-            //    chickCollided = false;
+            //    target = new Vector3();
             //}
-            prevHeading = heading;
-            heading = new Vector3();
+
+            prevCycleDir = cycleDir;
+            prevTarget = target;
+            prevDirectionNorth = directionNorth;
+
 
             Console.WriteLine("X: " + chickenPosition.X + ", Y: " + chickenPosition.Y + ", Z: " + chickenPosition.Z);
             base.Update(gameTime);
