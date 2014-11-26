@@ -23,6 +23,7 @@ namespace Assignment3
         BasicEffect effect;
         Effect customeffect;
         Effect customEffectAnimation;
+        TimeSpan extraMoveTime;
 
         Model floor;
         Model ceiling;
@@ -126,6 +127,7 @@ namespace Assignment3
             camera.Orientation = Quaternion.CreateFromRotationMatrix(Matrix.CreateRotationY(MathHelper.ToRadians(180)));
             camBox = new BoundingSphere(camera.Position, 4);
             chickenSphere = new BoundingSphere(chickenPosition, 50);
+            extraMoveTime = new TimeSpan(0, 0, 1);
 
             currentKeyboardState = Keyboard.GetState();
             currentGamePadState = GamePad.GetState(PlayerIndex.One);
@@ -265,7 +267,11 @@ namespace Assignment3
             if (((previousGamePadState.Buttons.Y == ButtonState.Released) && (currentGamePadState.Buttons.Y == ButtonState.Pressed))
                 || ((currentKeyboardState.IsKeyDown(Keys.W) && previousKeyboardState.IsKeyUp(Keys.W))))
             {
-                collisionOn = !collisionOn;
+                if ((camera.Position.X < (MAZE_X * WALL_WIDTH / 2)) && (camera.Position.Z < (MAZE_Y * WALL_WIDTH / 2))
+                    && (camera.Position.X > -(MAZE_X * WALL_WIDTH / 2)) && (camera.Position.Z > -(MAZE_X * WALL_WIDTH / 2)))
+                {
+                    collisionOn = !collisionOn;
+                }
             }
 
             if (((previousGamePadState.Buttons.X == ButtonState.Released) && (currentGamePadState.Buttons.X == ButtonState.Pressed))
@@ -380,9 +386,20 @@ namespace Assignment3
                 }
             }
 
+            //if (heading == Vector3.Zero && extraMoveTime > TimeSpan.Zero)
+            //{
+            //    //chickenPosition += Vector3.Cross(prevHeading, Vector3.Up);
+            //    heading = prevHeading;
+            //    extraMoveTime -= gameTime.ElapsedGameTime;
+            //}
+            //else
+            //{
+            //    heading = Vector3.Zero;
+            //    extraMoveTime = new TimeSpan(0, 0, 1);
+            //}
+
             if (heading == Vector3.Zero)
             {
-                //chickenPosition += Vector3.Cross(prevHeading, Vector3.Up);
                 if (prevHeading == new Vector3(1, 0, 0))
                 {
                     heading = new Vector3(0, 0, 1);
@@ -398,7 +415,7 @@ namespace Assignment3
                 else if (prevHeading == new Vector3(0, 0, -1))
                 {
                     heading = new Vector3(1, 0, 0);
-                }
+                }                
             }
 
             chickenPosition += heading;
@@ -604,7 +621,7 @@ namespace Assignment3
             if (chick.Intersects(wall))
             {
                 chickCollided = true;
-
+                extraMoveTime = new TimeSpan(0, 0, 1);
 
                 if (x == chickX)
                 {
@@ -631,6 +648,15 @@ namespace Assignment3
             }
             else
             {
+                //extraMoveTime -= gameTime.ElapsedGameTime;
+                //if (extraMoveTime > TimeSpan.Zero)
+                //{
+                //    dir = prevDir;
+                //}
+                //else
+                //{
+                //    dir = new Vector3();
+                //}
                 //if ((0 < chickX) && (chickX < MAZE_X - 1) && (0 < chickZ) && (chickZ < MAZE_Y - 1))
                 //{
                 //    if (mazeLayout[chickX, chickZ + 1] == 0)
