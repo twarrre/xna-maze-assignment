@@ -76,6 +76,7 @@ namespace Assignment3
         Song daySong;
         Song nightSong;
         Song currentSong;
+        float volume = 1.0f;
 
         public Game1()
         {
@@ -200,6 +201,7 @@ namespace Assignment3
             chickenAnimationPlayer.StartClip(clip);
 
             MediaPlayer.Play(daySong);
+            MediaPlayer.IsRepeating = true;
             currentSong = daySong;
 
             chickenPosition = camera.Position;
@@ -235,6 +237,17 @@ namespace Assignment3
 
             collided = false;
 
+            float distance;
+            Vector3 c = camera.Position;
+            Vector3.Distance(ref chickenPosition, ref c, out distance);
+            volume = (1.0f / distance) * 100;
+
+            if (fogOn)
+                volume /= 2;
+
+            volume = MathHelper.Clamp(volume, 0.0f, 1.0f);
+            MediaPlayer.Volume = volume;
+
             // Allows the game to exit
             if (currentGamePadState.Buttons.Back == ButtonState.Pressed
                 || currentKeyboardState.IsKeyDown(Keys.Escape))
@@ -259,11 +272,6 @@ namespace Assignment3
                 || ((currentKeyboardState.IsKeyDown(Keys.F) && previousKeyboardState.IsKeyUp(Keys.F))))
             {
                 fogOn = !fogOn;
-
-                if (fogOn)
-                    MediaPlayer.Volume = 0.5f;
-                else
-                    MediaPlayer.Volume = 1.0f;
             }
 
             if (((previousGamePadState.Buttons.RightShoulder == ButtonState.Released) && (currentGamePadState.Buttons.RightShoulder == ButtonState.Pressed))
