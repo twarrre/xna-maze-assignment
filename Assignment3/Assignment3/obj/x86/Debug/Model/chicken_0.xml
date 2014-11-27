@@ -3,7 +3,7 @@
   <Asset Type="Graphics:MeshContent">
     <Name>chicken:chicken</Name>
     <Identity>
-      <SourceFilename>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3Content\Model\chicken.fbx</SourceFilename>
+      <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3Content\Model\chicken.fbx</SourceFilename>
       <SourceTool>FbxImporter</SourceTool>
     </Identity>
     <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
@@ -26,7 +26,7 @@
     <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
       <Name>chicken:scene_material1</Name>
       <Identity>
-        <SourceFilename>C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3Content\Model\chicken.fbx</SourceFilename>
+        <SourceFilename>C:\Users\TiM\Desktop\BTech\Term1\COMP7051\Assignment3\git\Assignment3\Assignment3Content\Model\chicken.fbx</SourceFilename>
         <SourceTool>FbxImporter</SourceTool>
       </Identity>
       <OpaqueData>
@@ -47,6 +47,6 @@
     </Resource>
   </Resources>
   <ExternalReferences>
-    <ExternalReference ID="#External1" TargetType="Graphics:TextureContent">..\FBX\70894B6F\chicken.fbm\chicken_diffuse.dds</ExternalReference>
+    <ExternalReference ID="#External1" TargetType="Graphics:TextureContent">..\FBX\AF1929A6\chicken.fbm\chicken_diffuse.dds</ExternalReference>
   </ExternalReferences>
 </XnaContent>
