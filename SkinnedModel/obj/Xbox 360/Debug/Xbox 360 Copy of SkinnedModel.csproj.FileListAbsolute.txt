@@ -1,0 +1,6 @@
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\bin\Xbox 360\Debug\SkinnedModel.dll
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\bin\Xbox 360\Debug\SkinnedModel.pdb
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\obj\Xbox 360\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\obj\Xbox 360\Debug\SkinnedModel.dll
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\obj\Xbox 360\Debug\SkinnedModel.pdb
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\SkinnedModel\obj\Xbox 360\Debug\Xbox 360 Copy of SkinnedModel.csprojResolveAssemblyReference.cache

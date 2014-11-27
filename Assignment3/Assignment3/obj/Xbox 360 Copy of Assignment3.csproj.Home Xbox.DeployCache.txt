@@ -1,0 +1,53 @@
+a895c7fa625c46369f2ebefd3b7abb50
+0
+Home Xbox
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\
+130615365660000000
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\GameThumbnail.png
+2011-09-01T22:17:24.0000000Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Assignment3.exe
+2014-11-27T04:35:06.1284202Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\SkinnedModel.dll
+2014-11-27T04:34:07.0601858Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\chicken_diffuse_0.xnb
+2014-11-27T04:34:14.0642419Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\chicken_diffuse_1.xnb
+2014-11-27T04:34:17.8004554Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Audio\bounce.xnb
+2014-11-27T04:34:40.3604676Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Audio\day.wma
+2014-11-27T04:34:42.5013269Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Audio\day.xnb
+2014-11-27T04:34:42.5169531Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Audio\night.wma
+2014-11-27T04:34:44.2671811Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Audio\night.xnb
+2014-11-27T04:34:44.2984348Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Audio\walk.xnb
+2014-11-27T04:34:40.4698474Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Effects\Ambient.xnb
+2014-11-27T04:34:40.2823373Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Effects\AmbientAnim.xnb
+2014-11-27T04:34:40.3135915Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Model\ceiling.xnb
+2014-11-27T04:34:11.8178991Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Model\chicken.xnb
+2014-11-27T04:34:12.0212162Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Model\chicken_animv2.xnb
+2014-11-27T04:34:15.7871414Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Model\floor.xnb
+2014-11-27T04:34:11.8491507Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Model\home.xnb
+2014-11-27T04:34:11.9429033Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Model\wall.xnb
+2014-11-27T04:34:11.8960276Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Texture\chicken_diffuse.xnb
+2014-11-27T04:34:40.2510849Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Texture\home.xnb
+2014-11-27T04:34:32.1799041Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Texture\pavers1d2.xnb
+2014-11-27T04:34:23.2784326Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Texture\stone.xnb
+2014-11-27T04:34:34.0081237Z
+C:\Users\trevor\Desktop\Trevor\School\BCIT-VideoGameDevelopment\Term-1\7051 - Introduction To Game Development\Assignments\Ass3\maze-assignment\Assignment3\Assignment3\bin\Xbox 360\Debug\Content\Texture\walltexture.xnb
+2014-11-27T04:34:30.9140816Z
