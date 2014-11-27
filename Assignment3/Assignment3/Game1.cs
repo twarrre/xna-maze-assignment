@@ -218,8 +218,8 @@ namespace Assignment3
             currentSong = daySong;
 
 
-            chickenPosition = camera.Position;
-            chickenPosition.Y = 0;
+            //chickenPosition = camera.Position;
+            //chickenPosition.Y = 0;
             target = chickenPosition;
         }
 
@@ -285,11 +285,11 @@ namespace Assignment3
             if (((previousGamePadState.Buttons.Y == ButtonState.Released) && (currentGamePadState.Buttons.Y == ButtonState.Pressed))
                 || ((currentKeyboardState.IsKeyDown(Keys.W) && previousKeyboardState.IsKeyUp(Keys.W))))
             {
-                if ((camera.Position.X < (MAZE_X * WALL_WIDTH / 2)) && (camera.Position.Z < (MAZE_Y * WALL_WIDTH / 2))
-                    && (camera.Position.X > -(MAZE_X * WALL_WIDTH / 2)) && (camera.Position.Z > -(MAZE_X * WALL_WIDTH / 2)))
-                {
+                //if ((camera.Position.X < (MAZE_X * WALL_WIDTH / 2)) && (camera.Position.Z < (MAZE_Y * WALL_WIDTH / 2))
+                    //&& (camera.Position.X > -(MAZE_X * WALL_WIDTH / 2)) && (camera.Position.Z > -(MAZE_X * WALL_WIDTH / 2)))
+                //{
                     collisionOn = !collisionOn;
-                }
+                //}
             }
 
             if (((previousGamePadState.Buttons.X == ButtonState.Released) && (currentGamePadState.Buttons.X == ButtonState.Pressed))
@@ -386,103 +386,151 @@ namespace Assignment3
                 prevCamPosition = camera.Position;
             }
 
-            chickenAnimationPlayer.Update(gameTime.ElapsedGameTime, true, Matrix.CreateTranslation(chickenPosition));
+            //if (chickenPosition == target)
+            //{
+            //    Random rand = new Random();
+            //    cycleDir = rand.Next();
+            //    if ((cycleDir % 2 == 0) && (prevCycleDir % 2 == 0))
+            //    {
+            //        if ((mazeLayout[chickX, chickZ + 1] == 0) && (chickZ + 1 < MAZE_Y))
+            //        {
+            //            openPaths++;
+            //            target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ + 1)));
+            //        }
+            //        else if ((mazeLayout[chickX + 1, chickZ] == 0) && (chickX + 1 < MAZE_X))
+            //        {
+            //            openPaths++;
+            //            target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX + 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+            //        }
+            //        else if ((mazeLayout[chickX - 1, chickZ] == 0) && (chickX - 1 > 0))
+            //        {
+            //            openPaths++;
+            //            target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX - 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+            //        }
+            //        else if ((mazeLayout[chickX, chickZ - 1] == 0) && (chickZ - 1 > 0))
+            //        {
+            //            openPaths++;
+            //            target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ - 1)));
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if ((mazeLayout[chickX - 1, chickZ] == 0) && (chickX - 1 > 0))
+            //        {
+            //            target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX - 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+            //        }
+            //        else if ((mazeLayout[chickX, chickZ - 1] == 0) && (chickZ - 1 > 0))
+            //        {
+            //            target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ - 1)));
+            //        }
+            //        else if ((mazeLayout[chickX, chickZ + 1] == 0) && (chickZ + 1 < MAZE_Y))
+            //        {
+            //            target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ + 1)));
+            //        }
+            //        else if ((mazeLayout[chickX + 1, chickZ] == 0) && (chickX + 1 < MAZE_X))
+            //        {
+            //            target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX + 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+            //        }
+            //    }
 
-            if (chickenPosition == target)
-            {
-                Random rand = new Random();
-                cycleDir = rand.Next();
-                if ((cycleDir % 2 == 0) && (prevCycleDir % 2 == 0))
-                {
-                    if ((mazeLayout[chickX, chickZ + 1] == 0) && (chickZ + 1 < MAZE_Y))
-                    {
-                        openPaths++;
-                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ + 1)));
-                    }
-                    else if ((mazeLayout[chickX + 1, chickZ] == 0) && (chickX + 1 < MAZE_X))
-                    {
-                        openPaths++;
-                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX + 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
-                    }
-                    else if ((mazeLayout[chickX - 1, chickZ] == 0) && (chickX - 1 > 0))
-                    {
-                        openPaths++;
-                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX - 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
-                    }
-                    else if ((mazeLayout[chickX, chickZ - 1] == 0) && (chickZ - 1 > 0))
-                    {
-                        openPaths++;
-                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ - 1)));
-                    }
-                }
-                else
-                {
-                    if ((mazeLayout[chickX - 1, chickZ] == 0) && (chickX - 1 > 0))
-                    {
-                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX - 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
-                    }
-                    else if ((mazeLayout[chickX, chickZ - 1] == 0) && (chickZ - 1 > 0))
-                    {
-                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ - 1)));
-                    }
-                    else if ((mazeLayout[chickX, chickZ + 1] == 0) && (chickZ + 1 < MAZE_Y))
-                    {
-                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ + 1)));
-                    }
-                    else if ((mazeLayout[chickX + 1, chickZ] == 0) && (chickX + 1 < MAZE_X))
-                    {
-                        target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX + 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
-                    }
-                }
-                if (prevDistBetween == -(distBetween) && openPaths > 1)
-                {
-                    target = chickenPosition;
-                    distBetween.Y = 1;
-                }
-                else
-                {
-                    distBetween = new Vector3(chickenPosition.X - target.X, chickenPosition.Y - target.Y, chickenPosition.Z - target.Z);
-                }
-            }
+            //    if (prevDistBetween == -(distBetween) && openPaths > 1)
+            //    {
+            //        target = chickenPosition;
+            //        distBetween.Y = 1;
+            //    }
+            //    else
+            //    {
+            //        distBetween = new Vector3(chickenPosition.X - target.X, chickenPosition.Y - target.Y, chickenPosition.Z - target.Z);
+            //    }
+            //}
 
-            if (distBetween.X > 0)
-            {
-                chickenPosition.X -= 1;
-                distBetween.X -= 1;
-                chickenRot = (float)(3 * Math.PI / 2);
-            }
-            if (distBetween.X < 0)
-            {
-                chickenPosition.X += 1;
-                distBetween.X += 1;
-                chickenRot = (float)(Math.PI / 2);
-            }
-            if (distBetween.Z < 0)
-            {
-                chickenPosition.Z += 1;
-                distBetween.Z += 1;
-
-                chickenRot = (float)(Math.PI);
-            }
-            if (distBetween.Z > 0)
-            {
-                chickenPosition.Z -= 1;
-                distBetween.Z -= 1;
-
-                chickenRot = 0.0f;
-            }
+            //if (distBetween.X > 0)
+            //{
+            //    chickenPosition.X -= 1;
+            //    distBetween.X -= 1;
+            //    chickenRot = 270.0f;
+            //}
+            //if (distBetween.X < 0)
+            //{
+            //    chickenPosition.X += 1;
+            //    distBetween.X += 1;
+            //    chickenRot = 90.0f;
+            //}
+            //if (distBetween.Z < 0)
+            //{
+            //    chickenPosition.Z += 1;
+            //    distBetween.Z += 1;
+            //    chickenRot = 0;
+            //}
+            //if (distBetween.Z > 0)
+            //{
+            //    chickenPosition.Z -= 1;
+            //    distBetween.Z -= 1;
+            //    chickenRot = 180f;
+            //}
 
             //if (directionNorth == prevDirectionNorth)
             //{
             //    target = new Vector3();
             //}
 
+            if (chickenPosition.X == target.X && chickenPosition.Z == target.Z)
+            {
+                Random r = new Random();
+                bool newDirection = false;
+                while (!newDirection)
+                {
+                    int dir = r.Next(4);
+
+                    switch (dir)
+                    {
+                        case 0:
+                            if (chickX + 1 < MAZE_X && mazeLayout[chickX + 1, chickZ] == 0)
+                            {
+                                newDirection = true;
+                                heading = new Vector3(1, 0, 0);
+                                target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX + 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+                                chickenRot = 90;
+                            }
+                            break;
+                        case 1:
+                            if (chickZ + 1 < MAZE_Y && mazeLayout[chickX, chickZ + 1] == 0)
+                            {
+                                newDirection = true;
+                                heading = new Vector3(0, 0, -1);
+                                target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ + 1)));
+                                chickenRot = 180;
+                            }
+                            break;
+                        case 2:
+                            if (chickX - 1 >= 0 && mazeLayout[chickX - 1, chickZ] == 0)
+                            {
+                                newDirection = true;
+                                heading = new Vector3(-1, 0, 0);
+                                target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * (chickX - 1)), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * chickZ));
+                                chickenRot = 270;
+                            }
+                            break;
+                        case 3:
+                            if (chickZ - 1 >= 0 && mazeLayout[chickX, chickZ - 1] == 0)
+                            {
+                                newDirection = true;
+                                heading = new Vector3(0, 0, 1);
+                                target = new Vector3(maze_min_x - WALL_MIN_X - (-WALL_WIDTH * chickX), 0, maze_max_z - WALL_MAX_Z - (WALL_WIDTH * (chickZ - 1)));
+                                chickenRot = 0;
+                            }
+                            break;
+                    }
+                }
+            }
+            chickenPosition += heading;
+
             prevCycleDir = cycleDir;
             prevTarget = target;
             prevDirectionNorth = directionNorth;
 
+            chickenAnimationPlayer.Update(gameTime.ElapsedGameTime, true, Matrix.CreateRotationY(MathHelper.ToRadians(chickenRot)) * Matrix.CreateTranslation(chickenPosition));
 
-            Console.WriteLine("X: " + chickenPosition.X + ", Y: " + chickenPosition.Y + ", Z: " + chickenPosition.Z);
             base.Update(gameTime);
         }
 
@@ -568,10 +616,10 @@ namespace Assignment3
                 foreach (ModelMeshPart mmp in mm.MeshParts)
                 {
                     mmp.Effect = customEffectAnimation;
-                    customEffectAnimation.Parameters["World"].SetValue(groundMatrix[mm.ParentBone.Index] * Matrix.Identity * Matrix.CreateTranslation(pos) * Matrix.CreateRotationY(chickenRot));
+                    customEffectAnimation.Parameters["World"].SetValue(groundMatrix[mm.ParentBone.Index]);
                     customEffectAnimation.Parameters["View"].SetValue(camera.ViewMatrix);
                     customEffectAnimation.Parameters["Projection"].SetValue(camera.ProjectionMatrix);
-                    Matrix worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(groundMatrix[mm.ParentBone.Index] * Matrix.Identity * Matrix.CreateTranslation(pos)));
+                    Matrix worldInverseTransposeMatrix = Matrix.Transpose(Matrix.Invert(groundMatrix[mm.ParentBone.Index]));
                     customEffectAnimation.Parameters["WorldInverseTranspose"].SetValue(worldInverseTransposeMatrix);
                     customEffectAnimation.Parameters["ViewVector"].SetValue(viewVector);
                     customEffectAnimation.Parameters["ModelTexture"].SetValue(t);

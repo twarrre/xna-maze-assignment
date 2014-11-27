@@ -12,6 +12,7 @@ Down Arrow - move down
 Left Arrow - strafe left
 Right Arrow - strafe right
 
+m - turn on and off music
 w - turn on and off collision
 z - zoom in
 Z - zoom out
@@ -26,6 +27,7 @@ escape - quit game
 GamePad:
 Left anolog - move
 right anolog - move camera
+press right anolog - turns on and off music
 start - reset position
 x - turn on and off fog
 y - turn on and off collision
